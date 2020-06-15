@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.datastax.examples</groupId>
-	<artifactId>wkshop-microservice-parent</artifactId>
+	<artifactId>todobackend-cassandra-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<name>Spring microservices with Apache Cassandra</name>
@@ -50,10 +50,8 @@
 	</parent>
 
 	<modules>
-		<module>wkshop-microservice-1-common</module>
-		<module>wkshop-microservice-2-spring-boot</module>
-		<module>wkshop-microservice-3-spring-data</module>
-		<module>wkshop-microservice-4-spring-webflux</module>
+		<module>todobackend-cassandra</module>
+		<module>todobackend-cassandra-reactive</module>
 	</modules>
 
 	<dependencyManagement>

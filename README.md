@@ -21,12 +21,12 @@ For simplicity all exercises instructions are listed in a single `README.MD` doc
 | **Slide deck** | [Slidedeck for the workshop](4-materials/presentation.pdf) |
 | **1. Bootstrapping** | [Setup your environment](#1-bootstrapping) |
 | **2. Run the Todo Application** | [Exercise 2](#2-run-the-todo-application) |
-| **3. Create your Astra instance** | [Exercise 3](#exercise-2----create-the-data-model) |
-| **4. Connectivity to Astra** | [Connectivity to Cassandra](#exercise-3----connectivity-to-cassandra) |
-| **5. CRUD Repository** | [Implement CRUD Repository](#exercise-4----implement-crud-repository) |
-| **5. CRUD Repository Object Mapper** | [Run and Test the API](#exercise-5---run-and-test-the-api) |
-| **6. CRUD Repository Spring Data** | [Spring DATA](#exercise-6---spring-data) |
-| **7. Going Reactive** | [Spring Webflux](#exercise-7---spring-webflux) |
+| **3. Create your Astra instance** | [Exercise 3](#3-create-your-astra-instance) |
+| **4. Connectivity to Astra** | [Connectivity to Cassandra](#4-connectivity-to-astra) |
+| **5. CRUD Repository** | [Implement CRUD Repository](#5-crud-repository) |
+| **5. CRUD Repository Object Mapper** | [Run and Test the API](#6-crud-repository-with-object-mapper) |
+| **6. CRUD Repository Spring Data** | [Spring DATA](#7-crud-repository-with-spring-data) |
+| **7. Going Reactive** | [Spring Webflux](#8-going-reactive) |
 
 ## 1. Bootstrapping
 
