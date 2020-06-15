@@ -1,0 +1,11 @@
+${AnsiColor.BLUE} _________                                          .___              
+${AnsiColor.BLUE} \_   ___ \_____    ______ ___________    ____    __| _/___________   
+${AnsiColor.BLUE} /    \  \/\__  \  /  ___//  ___/\__  \  /    \  / __ |\_  __ \__  \  
+${AnsiColor.BLUE} \     \____/ __ \_\___ \ \___ \  / __ \|   |  \/ /_/ | |  | \// __ \_
+${AnsiColor.BLUE}  \______  (____  /____  >____  >(____  /___|  /\____ | |__|  (____  /
+${AnsiColor.BLUE}         \/     \/     \/     \/      \/     \/      \/            \/ 
+
+${AnsiColor.BLACK} This application requiress a running Cassandra Cluster to connect to
+${AnsiColor.BLACK} It shows you how to create API using Spring Data in Spring Boot 2x
+ 
+${AnsiColor.GREEN} The application is started at ${AnsiColor.RED}http://localhost:8080  

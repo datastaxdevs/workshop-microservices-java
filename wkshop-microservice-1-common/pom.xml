@@ -35,13 +35,19 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
-		
+	
 		<!-- Reactive -->
 		<dependency>
-    		<groupId>io.projectreactor</groupId>
-    		<artifactId>reactor-core</artifactId>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-core</artifactId>
 		</dependency>
-		
+	
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+			
 	</dependencies>
 
 	<build>

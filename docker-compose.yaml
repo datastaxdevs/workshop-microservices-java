@@ -9,7 +9,7 @@
 #
 # Commands:
 # docker exec -it `docker ps | grep cassandra-node1 | cut -b 1-12` bash
-# docker exec -it `docker ps | grepcassandra-node1 | cut -b 1-12` cqlsh
+# docker exec -it `docker ps | grep cassandra-node1 | cut -b 1-12` cqlsh
 ##
 version: '2'
 services:
