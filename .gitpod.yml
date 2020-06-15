@@ -1,5 +1,5 @@
 tasks:
-  - init: mvn install -DskipTests=false
+  - init: mvn install -Dmaven.test.skip=true
 
 ports:
-  - port: 8080,8081,8082
+  - port: 8080

@@ -83,12 +83,21 @@ You favourite java IDE here are some propositions:
 
 ### 1.3 How to setup Cloud-based environment ([gitpod](https://www.gitpod.io/))
 
-📘 Click on the following link
+**📘 Click on the following link**
+
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/DataStax-Academy/microservices-java-workshop-online)
 
-📗 Expected output
+Please note that a new tab is opened in your browser with an url like `https://<your_uid>.<your_region>.gitpod.io/#/workspace/microservices-java-workshop-online`. Those URL are dynamic and we cannot provide links in advance. Make sure to adapt the URL we provide you with your own ids.
 
-![SplashScreen](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-home?raw=true)
+**📘 Maven is preinstall**
+
+Gitpod provides all tools we will need for today including `Maven` and also export port `8080`. For instance in the terminal on the bottom part of the screen you :
+```bash
+mvn -v
+```
+
+**📗 Expected output**
+![SplashScreen](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-home.png?raw=true)
 
 [🏠back to table of content](#table-of-content)
 
@@ -193,8 +202,6 @@ You can open a browser and navigate to [http://localhost:8080](http://localhost:
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/backend-doc.png?raw=true)
 
-
-
 [🏠back to table of content](#table-of-content)
 
 
@@ -260,4 +267,8 @@ XXX
 
 
 THE END.
+
+
+
+
 
