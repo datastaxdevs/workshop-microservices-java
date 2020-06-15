@@ -10,17 +10,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.datastax.oss.driver.api.core.CqlSession;
-import com.datastax.oss.driver.api.core.config.DriverConfigLoader;
 
 /**
  * First Connectivity test with Astra.
  *
  * @author Cedrick LUNVEN (@clunven)
  */
-public class ConnectivityToAstraTest {
+public class ConnectivityToAstraExplicitTest {
 
     /** Logger for the class. */
-    private static Logger LOGGER = LoggerFactory.getLogger(ConnectivityToAstraTest.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(ConnectivityToAstraExplicitTest.class);
     
     /** Settings. */
     public static String ASTRA_ZIP_FILE = "/Users/cedricklunven/Downloads/secure-connect-devworkshopdb.zip";
@@ -51,20 +50,4 @@ public class ConnectivityToAstraTest {
                     cqlSession.getKeyspace().get());
         }
     }
-    
-    @Test
-    @DisplayName("Test connectivity to Astra delegate file")
-    public void should_connect_to_Astra_withConfig() {
-
-        // Config loader from file
-        DriverConfigLoader loader = DriverConfigLoader.fromFile(
-                new File(ConnectivityToAstraTest.class.getResource("/test_astra.conf").getFile()));
-        
-        // Use it to create the session
-        try (CqlSession cqlSession = CqlSession.builder().withConfigLoader(loader).build()) {
-            LOGGER.info(" + [OK] - Connection Established to Astra with Keyspace {}", 
-                    cqlSession.getKeyspace().get());
-        }
-    }
-
 }

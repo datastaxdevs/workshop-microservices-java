@@ -23,7 +23,7 @@ public class CreateSchemaInAstraTest implements TodoAppSchema {
         
         // Config loader from file
         DriverConfigLoader loader = DriverConfigLoader.fromFile(
-                new File(ConnectivityToAstraTest.class.getResource("/test_astra.conf").getFile()));
+                new File(CreateSchemaInAstraTest.class.getResource("/test_astra.conf").getFile()));
         
         // Use it to create the session
         try (CqlSession cqlSession = CqlSession.builder().withConfigLoader(loader).build()) {
@@ -44,16 +44,6 @@ public class CreateSchemaInAstraTest implements TodoAppSchema {
             
             // Then table is created
             LOGGER.info("Table '{}' has been created (if needed).", TABLE_TODO_TASKS);
-            
-            // List tables
-            SimpleStatement stmtListTableNames = SimpleStatement.builder(
-                    "SELECT table_name from tables WHERE keyspace_name= 'todoapp'")
-                    //.addNamedValue("kspace", cqlSession.getKeyspace().get())
-                    .build();
-            cqlSession.execute(stmtListTableNames).all().stream().forEach(row -> 
-                System.out.println(row.getColumnDefinitions())
-                //LOGGER.info("+ Table '{}' in keyspace '{}'", row.getString("table_name"), cqlSession.getKeyspace().get())
-            );
         }
     }
 }

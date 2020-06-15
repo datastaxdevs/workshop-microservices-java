@@ -307,148 +307,131 @@ Back the client UI change the URL to match you backend URL :
 
 Access to `ASTRA` service on url [https://astra.datastax.com](https://astra.datastax.com/)
 
-**✅  Register (if needed) and Sign In to Astra**
+**✅  Register (if needed) and Sign In to Astra** : You can use your `Github`, `Google` accounts or register with an `email`
 
 - Access [Registration Page](https://astra.datastax.com/register)
-![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/backend-ok.png?raw=true)
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-register.png?raw=true)
 
 - Access [Authentication Page](https://astra.datastax.com/)
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-login.png?raw=true)
 
 
-### Fill the Create New Database Form
+**✅  Fill the Create New Database Form** : As you don't have have any instances the login will route through the instance creation form. You will find below which values to enter for each field.
 
-As you don't have have any instances the login will route through the instance creation form. You will find below which values to enter for each field.
+- Access [Authentication Page](https://astra.datastax.com/)
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-2.png?raw=true)
 
-<img src="https://raw.githubusercontent.com/DataStax-Academy/cassandra-workshop-online/master/images/03.png" height="400" />
 
-
-- **Set the Compute Size**: For the work we are doing please use `Free tier`. You instance will be there forever, free of charge
+- **Set the Compute Size**: For the work we are doing please use `Free tier`. You instance will be there forever, free of charge. If you already have a free tier db that you created in a previous workshop (`killrvideo`) you can simply reuse it.
 
 - **Select the region**: This is the region where your database will reside physically (choose one close to you or your users). For people in EMEA please use `europe-west-1` idea here is to reduce latency.
 
-- **Fill in the database name** - `killrvideocluster.` While Astra allows you to fill in these fields with values of your own choosing, please follow our reccomendations to make the rest of the exercises easier to follow. If you don't, you are on your own! :)
+- **Fill in the database name** - Proposed value `dev-workshop-db`. You can use any alphanumeric value it is not part of the connection fields. Now it will be part of a file downloaded later and you should avoid capital letters.
 
-- **Fill in the keyspace name** - `killrvideo`. It's really important that you use the name killrvideo (with no 'e' in "killr") here in order for all the exercises to work well. We realize you want to be creative, but please just roll with this one today.
+With the fields below you can pick any names, simply remind them, they will be required both to show `Datastax Studio` and to do the exercises.
 
-- **Fill in the Database User name** - `KVUser`. Note the user name is case-sensitive. Please use the case we suggest here.
+- **Fill in the keyspace name** - Proposed value `todoapp` (no spaces, alpha numeric)
 
-- **Fill in the password** - `KVPassword`. Fill in both the password and the confirmation fields. Note that the password is also case-sensitive. Please use the case we suggest here.
+- **Fill in the user name** - `todouser`. Note the user name is case-sensitive. Please use the case we suggest here.
+
+- **Fill in the user password** - `todopassword`. Fill in both the password and the confirmation fields. Note that the password is also case-sensitive. Please use the case we suggest here.
 
 - **Launch the database**. Review all the fields to make sure they are as shown, and click the Launch Database button.
 
+**👁️ Expected output**
 
-<img src="https://raw.githubusercontent.com/DataStax-Academy/cassandra-workshop-online/master/images/04.png" height="300" />
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-3.png?raw=true)
 
+**✅ View your Database and connect** : View your database. It may take 2-3 minutes for your database to spin up. You will receive an email at that point. But, go ahead and continue with the rest of the exercise now.
 
-### View your Database and connect
+**👁️ Expected output**
 
-View your database. It may take 2-3 minutes for your database to spin up. You will receive an email at that point. But, go ahead and continue with the rest of the exercise now.
+*Initializing*
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-4.png?raw=true)
 
-<img src="https://raw.githubusercontent.com/DataStax-Academy/cassandra-workshop-online/master/images/05.png" height="300" />
+*Database is ready*
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-5.png?raw=true)
 
-
-Once Database is ready you should see the following home page:
-
-<img src="https://raw.githubusercontent.com/DataStax-Academy/cassandra-workshop-online/master/images/06.png" height="100" />
-
-
-Let’s review the database you have configured. In the box on the top-left side of the window, you can see the database and keyspace name metadata. The box on the top-right describes the size and location of your database. The lower-left box shows your estimated cost. Once Astra initializes the database completely, the lower-right box will have connection details.
-
-<img src="https://raw.githubusercontent.com/DataStax-Academy/cassandra-workshop-online/master/images/07.png" height="100" />
+**✅  Open DataStax Studio** : You can click on `Launch Developer Studio` blue link to enter the tool. Please enter the credentials you used for instance creation. (`todouser`, `todopassword`)
 
 
-### Open DataStax Studio
+- **Fill in the Database User name** - `todouser`. Note the user name is case-sensitive. Please use the case we suggest here.
 
-You can click on `Launch Developer Studio` blue button to start the tool. Please enter the credentials you used for Astra instance creation.
+- **Fill in the password** - `todopassword`. Fill in both the password and the confirmation fields. Note that the password is also case-sensitive. Please use the case we suggest here.
 
-<img src="https://raw.githubusercontent.com/DataStax-Academy/cassandra-workshop-online/master/images/08.png" height="300" />
+**👁️ Expected output**
 
-
-- **Fill in the Database User name** - `KVUser`. Note the user name is case-sensitive. Please use the case we suggest here.
-
-- **Fill in the password** - `KVPassword`. Fill in both the password and the confirmation fields. Note that the password is also case-sensitive. Please use the case we suggest here.
-
-TADA !
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-6.png?raw=true)
 
 [🏠 Back to Table of Content](#table-of-content)
 
 
 ## 4. Connectivity to Astra
 
+With `Cassandra-as-a-service` ready let's connect from our application
+
+**✅ Download the secure connect bundle** : On the home page of your DB first refresh (the download link will be valid 5 min we want to be sure we don't reach the timeout). Locate link `Download secure connect bundle` and click. You should download a file named `secure-connect-<your_db_name>.zip`. Please remind the location of the file.
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-7.png?raw=true)
+
+**✅ Upload the zip in `gitpod` ** :
+
+
+**✅ Fix unit test `ConnectivityToAstraExplicitTest.java` ** :
+
+**✅ Fix unit test `ConnectivityToAstraWithConfTest.java` ** :
+
+**✅ Fix unit test `CreateSchemaInAstraTest` ** :
+
+
+```sql
+CREATE TABLE todoapp.todo_tasks (
+    uid uuid PRIMARY KEY,
+    completed boolean,
+    offset int,
+    title text
+);
+```
+**✅ Check that the table `todoapp.todo_tasks` now exist ** :
+
+**✅ Create bean `CqlSession` in the application ** :
+
 
 [🏠back to table of content](#table-of-content)
 
 ## 5. CRUD Repository
 
+**✅ Fix Unit Test `CrudWithSimpleStatementTest` ** :
+
+**✅ Change injection dependency in `TodoListRestController` ** :
+
+
 [🏠back to table of content](#table-of-content)
 
 ## 6. CRUD Repository with Object Mapper
+
+**✅ Change dependency injection in `TodoListRestController` ** :
+
  
 [🏠back to table of content](#table-of-content)
 
 ## 7. CRUD Repository with Spring Data
 
+**✅ Cassandra Configuration ** :
+
+**✅ Change dependency injection in `TodoListRestController` ** :
+
+
 [🏠back to table of content](#table-of-content)
 
 ## 8. Going Reactive
 
-```
-XXX
-```
+**✅ Location project 2
+
+**✅ Change dependency injection in `TodoListRestController` ** :
+
 
 [🏠back to table of content](#table-of-content)
-
-## Exercise 3 -  Connectivity to Cassandra
-
-Do X Y Z
-
-```
-XXX
-```
-
-[🏠back to table of content](#table-of-content)
-
-## Exercise 4 -  Implement CRUD Repository
-
-Do X Y Z
-
-```
-XXX
-```
-
-[🏠back to table of content](#table-of-content)
-
-## Exercise 5 - Run and Test the API
-
-Do X Y Z
-
-```
-XXX
-```
-
-[🏠back to table of content](#table-of-content)
-
-## Exercise 6 - Spring DATA
-
-Do X Y Z
-
-```
-XXX
-```
-
-[🏠back to table of content](#table-of-content)
-
-## Exercise 7 - Spring Webflux
-
-Do X Y Z
-
-```
-XXX
-```
-
-[🏠back to table of content](#table-of-content)
-
 
 THE END.
 
