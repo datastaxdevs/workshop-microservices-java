@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.datastax.sample.entity.Task;
+import com.datastax.sample.model.Task;
 
 /**
  * Target of the workshop is to implement CRUD repository with multiple strategies

@@ -305,19 +305,15 @@ Back the client UI change the URL to match you backend URL :
 
 ## 3. Create your Astra instance
 
-Access to the `ASTRA` service on url [https://astra.datastax.com](https://astra.datastax.com/)
+Access to `ASTRA` service on url [https://astra.datastax.com](https://astra.datastax.com/)
 
-### Register and Login
+**✅  Register (if needed) and Sign In to Astra**
 
-Use your credentials to log in to ASTRA. Fill out the Log In dialog with your Constellation credentials, and click the Log In button - or register if you are one of the few people left on the earth without a Astra account.
+- Access [Registration Page](https://astra.datastax.com/register)
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/backend-ok.png?raw=true)
 
-This is the login form:
-
-<img src="https://raw.githubusercontent.com/DataStax-Academy/cassandra-workshop-online/master/images/01.png" height="300" />
-
-If you need, please sign up using the following form available with the `register` button:
-
-<img src="https://raw.githubusercontent.com/DataStax-Academy/cassandra-workshop-online/master/images/02.png" height="300" />
+- Access [Authentication Page](https://astra.datastax.com/)
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-login.png?raw=true)
 
 
 ### Fill the Create New Database Form
@@ -379,6 +375,7 @@ TADA !
 
 
 ## 4. Connectivity to Astra
+
 
 [🏠back to table of content](#table-of-content)
 

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.datastax.oss.driver.api.core.CqlSession;
-import com.datastax.sample.entity.Task;
+import com.datastax.sample.model.Task;
 
 /**
  * Default in-memory implementation of the repository.

@@ -1,4 +1,4 @@
-package com.datastax.sample.entity;
+package com.datastax.sample.model;
 
 import java.io.Serializable;
 

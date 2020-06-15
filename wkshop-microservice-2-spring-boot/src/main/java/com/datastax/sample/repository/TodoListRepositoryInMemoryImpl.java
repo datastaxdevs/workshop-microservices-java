@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Repository;
 
-import com.datastax.sample.entity.Task;
+import com.datastax.sample.model.Task;
 
 /**
  * Default in-memory implementation of the repository.

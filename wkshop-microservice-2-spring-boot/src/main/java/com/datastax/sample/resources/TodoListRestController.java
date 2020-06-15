@@ -33,9 +33,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.datastax.oss.driver.api.core.DriverException;
-import com.datastax.sample.entity.TaskResource;
-import com.datastax.sample.entity.TaskBody;
-import com.datastax.sample.entity.Task;
+import com.datastax.sample.model.Task;
+import com.datastax.sample.model.TaskBody;
+import com.datastax.sample.model.TaskResource;
 import com.datastax.sample.repository.TodoListRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
