@@ -5,11 +5,11 @@
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
 
-*"In this repository, you'll find everything you need related to the Cassandra Developer Workshop Build Java Microservices for Apache Cassandra. [The first live stream will be June 17th](https://www.youtube.com/watch?v=KAcZg6l9QTw). Past this date the `README.MD` will be updated with the recording. Feel free to bookmark this page for future reference, Enjoy"!* - The Developer Advocates Team.
+*"In this repository, you'll find everything you need related to the **Cassandra Developer Workshop Build Java Microservices for Apache Cassandra**. [The first live stream will be June 17th](https://www.youtube.com/watch?v=KAcZg6l9QTw). Past this date the `README.MD` will be updated with the recording. Feel free to bookmark this page for future reference, Enjoy"!* - The Developer Advocates Team.
 
 ![SplashScreen](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/splash.png?raw=true)
 
-The `Cassandra Developer Workshorp` are an interactive experience. Advocates share some knowledge about part of Apache Cassandra™ database but you can interact with them through the chats *([youtube](https://www.youtube.com/channel/UCAIQY251avaMv7bBv5PCo-A) and [discord](https://discord.com/widget?id=685554030159593522&theme=dark))*, by doing  quizzes (menti.com), by doing the exercises below.
+`Cassandra Developer Workshorp` are an interactive experiences. Advocates share some knowledge about  Apache Cassandra™ database and you can interact with them through chats *([youtube](https://www.youtube.com/channel/UCAIQY251avaMv7bBv5PCo-A) and [discord](https://discord.com/widget?id=685554030159593522&theme=dark))*, quizzes (menti.com), and  exercises.
 
 # Table of Content
 For simplicity all exercises instructions are listed in a single `README.MD` document. As it is quite long we provide you a table of content is provided and after each chapter you can go back to it.
@@ -29,7 +29,7 @@ For simplicity all exercises instructions are listed in a single `README.MD` doc
 ## 1. Bootstrapping
 
 ### 1.1 Clone the Repository
-There are 2 ways to do the exercises, **locally** on your computer and with a **cloud-based IDE named Gitpod.** We recommend you to use your laptop to get the code modifications your are doing. In both case you should start by cloning this repository to download everything (including the slides).
+There are 2 ways to do the exercises, **locally** on your computer and with a **cloud-based IDE named Gitpod.** We recommend you to use your laptop in order to save code modifications and come back later. In both cases you should start by cloning the repository and download everything (including slides).
 
 ```bash
 # Clone the current repository
@@ -41,7 +41,7 @@ cd microservices-java-workshop-online
 
 ### 1.2 Setup your computer to run the exercises
 
-We will create a REST API using the Spring framework stack. Those are the pre-requisites on your laptop.
+We will create a REST API using the Spring framework. Those are the pre-requisites tools to install on your laptop before starting.
 
 **1.2.a - Install Java JDK8 +**
 - ![Windows](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/windows32.png?raw=true) Please use the following tutorial [Installation of the JDK on Microsoft Windows Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-microsoft-windows-platforms.html#GUID-A7E27B90-A28D-4237-9383-A58B416071CA)
@@ -53,10 +53,9 @@ brew cask install java
 
 **1.2.b - Install Maven**
 
-`TODO`
-- ![Windows](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/windows32.png?raw=true) Please use the following tutorial [Installation of the JDK on Microsoft Windows Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-microsoft-windows-platforms.html#GUID-A7E27B90-A28D-4237-9383-A58B416071CA)
-- ![linux](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/linux32.png?raw=true) Please use the following tutorial [Installation of the JDK on Linux Platform Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html#GUID-737A84E4-2EFF-4D38-8E60-3E29D1B884B8)
-- ![osx](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/mac32.png?raw=true) Please use the following tutorial [Installation of the JDK on MACOS Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html#GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE) or with homebrew:
+- ![Windows](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/windows32.png?raw=true) Foo [Bar](#bar)
+- ![linux](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/linux32.png?raw=true) Foo [Bar](#bar)
+- ![osx](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/mac32.png?raw=true)  Foo [Bar](#bar)
 ```
 brew install maven
 ```
@@ -82,85 +81,16 @@ You favourite java IDE here are some propositions:
 - [Eclipse](https://www.eclipse.org/downloads/)
 - [Visual Code](https://code.visualstudio.com/Download)
 
-**1.2.d - Install Docker**
-Docker is an open-source project that automates the deployment of software applications inside containers by providing an additional layer of abstraction and automation of OS-level virtualization on Linux.
-- ![Windows](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/windows32.png?raw=true) Please use the following installer [Docker Dekstop for Windows Installer](https://download.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
-- ![osx](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/mac32.png?raw=true) Please use the following installer [Docker Dekstop for MAC Installer](https://download.docker.com/mac/stable/Docker.dmg) or [homebrew](https://docs.brew.sh/Installation) with following commands:
-```bash
-# Fetch latest version of homebrew and formula.
-brew update              
-# Tap the Caskroom/Cask repository from Github using HTTPS.
-brew tap caskroom/cask                
-# Searches all known Casks for a partial or exact match.
-brew search docker                    
-# Displays information about the given Cask
-brew cask info docker
-# Install the given cask.
-brew cask install docker              
-# Remove any older versions from the cellar.
-brew cleanup
-# Validate installation
-docker -v
-```
-- ![linux](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/linux32.png?raw=true) You can use the following commands:
-```bash
-# Remove if already install
-sudo yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-engine
-# Utils
-sudo yum install -y yum-utils
-
-# Add docker-ce repo
-sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-# Install
-sudo dnf -y  install docker-ce --nobest
-# Enable service
-sudo systemctl enable --now docker
-# Get Status
-systemctl status  docker
-
-# Logout....Lougin
-exit
-# Create user
-sudo usermod -aG docker $USER
-newgrp docker
-
-# Validation
-docker images
-docker run hello-world
-docker -v
-```
-
-**1.2.e - Install Docker Compose**
-
-Docker Compose is a tool for defining and running multi-container Docker applications. It uses YAML files to configure the application's services and performs the creation and start-up process of all the containers with a single command. The `docker-compose` CLI utility allows users to run commands on multiple containers at once, for example, building images, scaling containers, running containers that were stopped, and more. Please refer to [Reference Documentation](https://docs.docker.com/compose/install/) if you have for more detailed instructions.
-
-![Windows](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/windows32.png?raw=true) : Already **included** in the previous package *Docker for Windows*
-
-![osx](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/mac32.png?raw=true) : Already **included** in the previous package *Docker for Mac*
-
-![linux](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/linux32.png?raw=true) : To install on linux (centOS) you can use the following commands
-
-```bash
-# Download deliverable and move to target location
-sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-# Allow execution
-sudo chmod +x /usr/local/bin/docker-compose
-```
-
 ### 1.3 How to setup Cloud-based environment ([gitpod](https://www.gitpod.io/))
 
-Click on the following link, you are set :)
+📘 Click on the following link
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/DataStax-Academy/microservices-java-workshop-online)
 
-[Back to Table of Content](#toc)
+📗 Expected output
+
+![SplashScreen](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-home?raw=true)
+
+[🏠back to table of content](#table-of-content)
 
 ## 2. Run the Todo Application
 
@@ -190,11 +120,12 @@ There are multiple free implementations available already. Some implementations 
 ![TodoBackendTest](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todobackend-runtest.png?raw=true)
 
 **📗 Expected output**
+
 ![TodoBackendOuput](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todobackend-output-host.png?raw=true)
 
 *Note: During the live stream you will be hundreds testing the same endpoint so maybe we could hit some issues - race conditions.*
 
-📘  **TodoBackend.com** also provides a client, one of the TodoMVC we saw before. [https://www.todobackend.com/client/index.html) to work with the API. As before pick one of the `endpoints` listed before adn try the client.
+📘  **TodoBackend.com** also provides a [client](https://www.todobackend.com/client/index.html), to work with the API. As before pick one of the `endpoints` listed before and try the client.
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todobackend-runclient.png?raw=true)
 
@@ -202,7 +133,65 @@ There are multiple free implementations available already. Some implementations 
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todobackend-output-client.png?raw=true)
 
-**OUR MISSION NOW SHOUD WE ACCEPT IT IT TO RUN THE REST API ON OUR ENVIRONMENT**
+### 2.3 Start the BackendAPI
+
+Our mission withing the next hour is to implement the backend API and store the data into Apache Cassandra™. We have you cover by providing the skeleton. Let's see what we have.
+
+📘 **Start the backend API**
+```bash
+# Build the project without tests (you did not implemented them yet TDD baby !)
+mvn clean install -Dmaven.test.skip=true
+
+# Navigate to the proper folder
+cd wkshop-microservice-2-spring-boot/
+
+# Start the backend API
+mvn spring-boot:run
+```
+
+**📗 Expected output**
+
+```bash
+[...]
+INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Spring microservices with Apache Cassandra 1.0-SNAPSHOT:
+[INFO] 
+[INFO] Spring microservices with Apache Cassandra ......... SUCCESS [  4.115 s]
+[INFO] + microservice-1-common ............................ SUCCESS [  8.893 s]
+[INFO] + microservice-2-spring-boot ....................... SUCCESS [  3.504 s]
+[INFO] + microservice-3-spring-data ....................... SUCCESS [  1.369 s]
+[INFO] + microservice-4-spring-webflux .................... SUCCESS [  0.311 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18.701 s
+[INFO] Finished at: 2020-06-15T13:08:57Z
+[INFO] ------------------------------------------------------------------------
+
+[...]
+
+ ________                __      __ __           .__                   
+ \______ \   _______  __/  \    /  \  | __  _____|  |__   ____ ______  
+  |    |  \_/ __ \  \/ /\   \/\/   /  |/ / /  ___/  |  \ /  _ \\____ \ 
+  |    `   \  ___/\   /  \        /|    <  \___ \|   Y  (  <_> )  |_> >
+ /_______  /\___  >\_/    \__/\  / |__|_ \/____  >___|  /\____/|   __/ 
+         \/     \/             \/       \/     \/     \/       |__|    
+
+ Backend API implementation of todobackend.com
+ We are using SpringBoot and Apache Cassandra
+ The application is started at http://localhost:8080  
+
+14:54:54.773 INFO  com.datastax.sample.TodoBackendApplication         : Starting TodoBackendApplication on clunhost with PID 75757 (/Users/cedricklunven/dev/WORKSPACES/DATASTAX/microservices-java-workshop-online/wkshop-microservice-2-spring-boot/target/classes started by cedricklunven in /Users/cedricklunven/dev/WORKSPACES/DATASTAX/microservices-java-workshop-online/wkshop-microservice-2-spring-boot)
+14:54:54.775 INFO  com.datastax.sample.TodoBackendApplication         : No active profile set, falling back to default profiles: default
+14:55:03.604 INFO  com.datastax.sample.TodoBackendApplication         : Started TodoBackendApplication in 1.075 seconds (JVM running for 1.492)
+```
+
+📘 **Test the API**
+You can open a browser and navigate to [http://localhost:8080](http://localhost:8080) if you are on your laptop or [https://<your_uid>.<your_region>.gitpod.io/#/workspace/microservices-java-workshop-online](#) if you are using gitpod.
+
+**📗 Expected output**
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/backend-doc.png?raw=true)
 
 
 
@@ -271,8 +260,4 @@ XXX
 
 
 THE END.
-
-
-
-
 

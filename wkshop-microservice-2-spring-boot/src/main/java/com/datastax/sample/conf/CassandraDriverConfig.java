@@ -8,7 +8,7 @@ import com.datastax.oss.driver.api.core.CqlSession;
 /**
  * Configuration of connectivity with Cassandra.
  */
-@Configuration
+//@Configuration
 public class CassandraDriverConfig {
     
     @Bean

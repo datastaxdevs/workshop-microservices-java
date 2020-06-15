@@ -1,11 +1,12 @@
-${AnsiColor.BLUE} _________                                          .___              
-${AnsiColor.BLUE} \_   ___ \_____    ______ ___________    ____    __| _/___________   
-${AnsiColor.BLUE} /    \  \/\__  \  /  ___//  ___/\__  \  /    \  / __ |\_  __ \__  \  
-${AnsiColor.BLUE} \     \____/ __ \_\___ \ \___ \  / __ \|   |  \/ /_/ | |  | \// __ \_
-${AnsiColor.BLUE}  \______  (____  /____  >____  >(____  /___|  /\____ | |__|  (____  /
-${AnsiColor.BLUE}         \/     \/     \/     \/      \/     \/      \/            \/ 
 
-${AnsiColor.BLACK} This application requiress a running Cassandra Cluster to connect to
-${AnsiColor.BLACK} It shows you how to create API using Spring Data in Spring Boot 2x
- 
+${AnsiColor.BLUE} ________                __      __ __           .__                   
+${AnsiColor.BLUE} \______ \   _______  __/  \    /  \  | __  _____|  |__   ____ ______  
+${AnsiColor.BLUE}  |    |  \_/ __ \  \/ /\   \/\/   /  |/ / /  ___/  |  \ /  _ \\____ \ 
+${AnsiColor.BLUE}  |    `   \  ___/\   /  \        /|    <  \___ \|   Y  (  <_> )  |_> >
+${AnsiColor.BLUE} /_______  /\___  >\_/    \__/\  / |__|_ \/____  >___|  /\____/|   __/ 
+${AnsiColor.BLUE}         \/     \/             \/       \/     \/     \/       |__|    
+
+${AnsiColor.CYAN} Backend API implementation of todobackend.com
+${AnsiColor.CYAN} We are using SpringBoot and Apache Cassandra
+
 ${AnsiColor.GREEN} The application is started at ${AnsiColor.RED}http://localhost:8080  
