@@ -17,10 +17,10 @@ import com.datastax.sample.entity.Task;
  * 
  * @author Cedrick LUNVEN (@clunven)
  */
-@Repository("todobackend.repo.cassandra-driver")
+//@Repository("todobackend.repo.cassandra-driver")
 public class TodoListRepositoryCassandraDriverImpl implements TodoListRepository {
     
-    @Autowired
+    //@Autowired
     public CqlSession cqlSession;
     
     /** {@inheritDoc} */
