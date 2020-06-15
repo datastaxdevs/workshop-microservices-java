@@ -19,8 +19,8 @@ For simplicity all exercises instructions are listed in a single `README.MD` doc
 | Sections  | Material Description
 |---|---|
 | **Slide deck** | [Slidedeck for the workshop](4-materials/presentation.pdf) |
-| **1. Bootstrapping** | [Setup your environment](4-materials/presentation.pdf) |
-| **2. Run the Todo Application** | [Exercise 2](#exercise-1---create-your-astra-instance) |
+| **1. Bootstrapping** | [Setup your environment](#1-bootstrapping) |
+| **2. Run the Todo Application** | [Exercise 2](#2-run-the-todo-application) |
 | **3. Create your Astra instance** | [Exercise 3](#exercise-2----create-the-data-model) |
 | **4. Connectivity to Astra** | [Connectivity to Cassandra](#exercise-3----connectivity-to-cassandra) |
 | **5. CRUD Repository** | [Implement CRUD Repository](#exercise-4----implement-crud-repository) |
@@ -32,7 +32,7 @@ For simplicity all exercises instructions are listed in a single `README.MD` doc
 
 There are 2 ways to do the exercises, **locally** on your computer and with a **cloud-based IDE named Gitpod.** We recommend you to use your laptop in order to save code modifications and come back later. In both cases you should start by cloning the repository and download everything (including slides).
 
-### Option A - Work with a 100% Cloud-based Environment ☁️
+- ### Option A - Work with a 100% Cloud-based Environment ☁️
 
 **✅ Open gitpod** : [Gitpod](https://www.gitpod.io/) is an IDE 100% online based on Eclipse Theia. To initialize your environment simply click on the button below.
 
@@ -45,9 +45,9 @@ A new tab opens in your browser at  `https://<your_uid>.<your_region>.gitpod.io/
 
 **That's it.** Gitpod provides all tools we will need for today including `Maven` and exporting port `8080`. At initialization of the workspace we schedule a `mvn clean install` to download dependencies. You can still download the repository and bookmark it as all materials including slides are part of it.
 
-### Option B - Work with Local Environment 💻
+- ### Option B - Work with Local Environment 💻
 
-This part is dedicated to people will to run the exercises on their laptop. You can skip it and directly go to [2. Run the Todo Application](#) if you want to work with gitpod.
+This part is dedicated to people will to run the exercises on their laptop. You can skip it and directly go to [2. Run the Todo Application](#2-run-the-todo-application) if you want to work with gitpod.
 
 **✅ Clone the repository :** : With `git` or through the web UI clone the repo
 ```bash
@@ -192,9 +192,7 @@ There are multiple free implementations available already. Some implementations 
 - `Endpoint#2` : [https://todo-quarkus.herokuapp.com/todos](https://todo-quarkus.herokuapp.com/todos)
 - `Endpoint#3` : [https://todo-backend-micronaut.herokuapp.com/todos](https://todo-backend-micronaut.herokuapp.com/todos)
 
-**TodoBackend.com** provides a we bUI [spec runner](https://www.todobackend.com/specs/index.html) to test APIs against specifications. 
-
-**✅ Test TodoBackEnd Spec Runner** : Use one of the `endpoints` decribed below to evaluate if the API matchs the requirements and `Run Tests`
+**✅ Test TodoBackEnd Spec Runner** : Locate the [spec runner](https://www.todobackend.com/specs/index.html) and use one of the `endpoints` listed below to evaluate if API matchs the requirements. To do so copy-paste one URL and click `Run Tests`.
 
 ![TodoBackendTest](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todobackend-runtest.png?raw=true)
 
