@@ -62,7 +62,7 @@ git clone https://github.com/DataStax-Academy/microservices-java-workshop-online
 cd microservices-java-workshop-online
 ```
 
-**✅ (local env)  Install Java (JDK8+)** Pick the proper infos based on your operating system
+**✅ (local env)  Install Java (JDK 11 +)** Pick the proper infos based on your operating system
 - ![Windows](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/windows32.png?raw=true) Please use the following tutorial [Installation of the JDK on Microsoft Windows Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-microsoft-windows-platforms.html#GUID-A7E27B90-A28D-4237-9383-A58B416071CA)
 - ![linux](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/linux32.png?raw=true) Please use the following tutorial [Installation of the JDK on Linux Platform Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html#GUID-737A84E4-2EFF-4D38-8E60-3E29D1B884B8)
 - ![osx](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/mac32.png?raw=true) Please use the following tutorial [Installation of the JDK on MACOS Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html#GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE) or with [homebrew](https://docs.brew.sh/Installation):

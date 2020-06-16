@@ -63,7 +63,7 @@ public class TodoListRestController {
     
     @Autowired
     @Qualifier("todobackend.repo.inmemory")
-    //@Qualifier("todobackend.repo.cassandra-driver")
+    // @Qualifier("todobackend.repo.cassandra-driver")
     // @Qualifier("todobackend.repo.cassandra-object-mapper")
     // @Qualifier("todobackend.repo.spring-data-cassandra")
     private TodoListRepository todoRepository;
@@ -98,14 +98,9 @@ public class TodoListRestController {
             method = GET,
             produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TaskResource>> findAll(HttpServletRequest request) {
-        logger.info("List all task in the db: {}", request.getRequestURL().toString() + "?" + request.getQueryString());
-        String currentUrl = request.getRequestURL().toString();
-        if (request.isSecure()) {
-            currentUrl = currentUrl.replaceAll("http", "https");
-        }
-        final String taskUrl = currentUrl;
+        logger.info("List all task in the db: {}", rewriteUrl(request) + "?" + request.getQueryString());
         return ResponseEntity.ok(todoRepository.findAll()
-                .stream().map(dto -> new TaskResource(taskUrl + dto.getUuid(), dto))
+                .stream().map(dto -> new TaskResource(rewriteUrl(request) + dto.getUuid(), dto))
                 .collect(Collectors.toList()));
     }
     
@@ -119,7 +114,7 @@ public class TodoListRestController {
     @ApiResponses(value = { @ApiResponse(responseCode = "204", description = "No results") } )  
     @RequestMapping(value = "/", method = DELETE)
     public ResponseEntity<Void> deleteAll(HttpServletRequest request) {
-        logger.info("Delete all task in the db: {}", request.getRequestURL().toString() + "?" + request.getQueryString());
+        logger.info("Delete all task in the db: {}", rewriteUrl(request) + "?" + request.getQueryString());
         todoRepository.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -162,7 +157,7 @@ public class TodoListRestController {
                 taskCreationRequest.getOrder());
         todoRepository.upsert(dto);
         // Created
-        TaskResource bean = new TaskResource(request.getRequestURL().toString() + dto.getUuid(), dto);
+        TaskResource bean = new TaskResource(rewriteUrl(request) + dto.getUuid(), dto);
         return ResponseEntity.created(new URI(bean.getUrl())).body(bean);
     }
     
@@ -187,7 +182,7 @@ public class TodoListRestController {
                      description="Unique identifier for the task",
                      example = "smith", required=true )
             @PathVariable(value = "taskId") String taskId) {
-        logger.info("Find a task with its id {}", request.getRequestURL().toString() + "?" + request.getQueryString());
+        logger.info("Find a task with its id {}", rewriteUrl(request) + "?" + request.getQueryString());
         Assert.hasLength(taskId, "TaskId id is required and should not be null");
         Optional<Task> myTask = todoRepository.findById(UUID.fromString(taskId));
         // Routing Result
@@ -195,7 +190,7 @@ public class TodoListRestController {
             logger.warn("Task with uid {} has not been found", taskId);
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(new TaskResource(request.getRequestURL().toString(), myTask.get()));
+        return ResponseEntity.ok(new TaskResource(rewriteUrl(request), myTask.get()));
     }
     
     /**
@@ -243,7 +238,7 @@ public class TodoListRestController {
         existing.setCompleted(taskBody.isCompleted());
         existing.setOrder(taskBody.getOrder());
         todoRepository.upsert(existing);
-        return ResponseEntity.ok(new TaskResource(request.getRequestURL().toString(), existing));
+        return ResponseEntity.ok(new TaskResource(rewriteUrl(request), existing));
     }
     
     /**
@@ -293,6 +288,18 @@ public class TodoListRestController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String _errorDriverHandler(DriverException e) {
       return e.getMessage();
+    }
+    
+    /**
+     * As isSecure is still false and https is enforce by gitpod let's 
+     * change it.
+     */
+    private String rewriteUrl(HttpServletRequest request) {
+        String myUrl = request.getRequestURL().toString();
+        if (myUrl.contains("gitpod")) {
+            myUrl = myUrl.replaceAll("http", "https");
+        }
+        return myUrl;
     }
 
 }
