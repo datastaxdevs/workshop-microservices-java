@@ -20,7 +20,7 @@ import com.datastax.sample.model.Task;
  * 
  * @author Cedrick LUNVEN (@clunven)
  */
-@Repository("todobackend.repo.inmemory")
+@Repository("todobackend.repo.cassandra-object-mapper")
 public class TodoListRepositoryObjectMapperImpl implements TodoListRepository {
 
     /** This will be our storage in memory. */

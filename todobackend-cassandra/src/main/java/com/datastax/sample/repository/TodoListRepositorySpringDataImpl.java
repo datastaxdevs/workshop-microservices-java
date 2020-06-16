@@ -20,7 +20,7 @@ import com.datastax.sample.model.Task;
  * 
  * @author Cedrick LUNVEN (@clunven)
  */
-@Repository("todobackend.repo.inmemory")
+@Repository("todobackend.repo.spring-data-cassandra")
 public class TodoListRepositorySpringDataImpl implements TodoListRepository {
 
     /** This will be our storage in memory. */
