@@ -67,7 +67,7 @@ public class TodoListRepositoryCassandraDriverImpl implements TodoListRepository
          * No Prepared Statements Here simpy define the needed query.
          *
          * INSERT into todo_tasks(uid, title, offset, completed)
-         * VALUES (uuid(), 'One', 1, true);{@inheritDoc}
+         * VALUES (uuid(), 'One', 1, true);
          */
         SimpleStatement stmtInsertTask = SimpleStatement.builder(""
                 + "INSERT INTO todo_tasks(uid, title, offset, completed)" 
