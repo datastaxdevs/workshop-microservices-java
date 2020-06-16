@@ -29,18 +29,18 @@ import com.datastax.sample.repository.TodoListRepositoryCassandraDriverImpl;
  */
 @RunWith(JUnitPlatform.class)
 @SpringJUnitConfig
-public class CrudWithSimpleStatementTest {
+public class CrudWithCassandraDriverIntegrationTest {
 
     /** Logger for the class. */
     private static Logger LOGGER = 
-            LoggerFactory.getLogger(CrudWithSimpleStatementTest.class);
+            LoggerFactory.getLogger(CrudWithCassandraDriverIntegrationTest.class);
     
     @TestConfiguration
     static class CrudWithCassandraDriverConfiguration {
   
         @Bean
         public CqlSession cqlSession() {
-            String configFile = CrudWithSimpleStatementTest.class.getResource("/application_test.conf").getFile();
+            String configFile = CrudWithCassandraDriverIntegrationTest.class.getResource("/application_test.conf").getFile();
             DriverConfigLoader configLoader = DriverConfigLoader.fromFile(new File(configFile));
             return CqlSession.builder().withConfigLoader(configLoader).build();
         }

@@ -457,16 +457,16 @@ describe keyspace todoapp
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/describe-output-cqlconsole.png?raw=true)
 
-**✅ Step 5c. Fix Unit Test `CrudWithSimpleStatementTest`:** This is time to insert values into the table and extract values from it.
+**✅ Step 5c. Fix Unit Test `CrudWithCassandraDriverIntegrationTest`:** This is time to insert values into the table and extract values from it.
 
-Locate [CrudWithSimpleStatement](./todobackend-cassandra/src/test/java/com/datastax/sample/astra/CrudWithSimpleStatementTest.java) class and specially method `test_Insert()`. Fix the test
+Locate [CrudWithCassandraDriverIntegrationTest](./todobackend-cassandra/src/test/java/com/datastax/sample/astra/CrudWithCassandraDriverIntegrationTest.java) class and specially method `test_Insert()`. Fix the test
 and execute it with the following command.
 
 
 - Execute your test (solution is provided at the bottom of the class)
 
 ```bash
-mvn test -Dtest=com.datastax.samples.astra.CrudWithSimpleStatementTest#test_Insert
+mvn test -Dtest=com.datastax.samples.astra.CrudWithCassandraDriverIntegrationTest#test_Insert
 ```
 
 - Solution
@@ -486,7 +486,7 @@ cqlSession.execute(stmtInsertTask);
  - There is another test in the same class to test all options: 
 
 ```bash
-mvn test -Dtest=com.datastax.samples.astra.CrudWithSimpleStatementTest#should_create_task_with_new_uid
+mvn test -Dtest=com.datastax.samples.astra.CrudWithCassandraDriverIntegrationTest#should_create_task_with_new_uid
 ```
 
 
