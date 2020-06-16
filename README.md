@@ -9,15 +9,15 @@
 
 ![SplashScreen](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/splash.png?raw=true)
 
-`Cassandra Developer Workshorp` are an interactive experiences. Advocates share some knowledge about  Apache Cassandra™ database and you can interact with them through chats *([youtube](https://www.youtube.com/channel/UCAIQY251avaMv7bBv5PCo-A) and [discord](https://discord.com/widget?id=685554030159593522&theme=dark))*, quizzes (menti.com), and  exercises.
+`Cassandra Developer Workshops` are an interactive experience. Advocates share knowledge about Apache Cassandra™ databases and you interact with them through chats *([youtube](https://www.youtube.com/channel/UCAIQY251avaMv7bBv5PCo-A) and [discord](https://discord.com/widget?id=685554030159593522&theme=dark))*, quizzes (menti.com), and exercises.
 
-Today we are creating the Todo Application with storage in to Apache Cassandra™.
+Today we are creating the Todo Application with storage in Apache Cassandra™.
 
 ![Home](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/home.png?raw=true)
 
 
 # Table of Content
-For simplicity all exercises instructions are listed in a single `README.MD` document. As it is quite long we provide you a table of content is provided and after each chapter you can go back to it.
+For simplicity all exercise instructions are listed in a single `README.MD` document. As it is quite long we provide a table of contents after each chapter so you can go back to it.
 
 | Sections  | Material Description
 |---|---|
@@ -41,17 +41,17 @@ There are 2 ways to do the exercises, **locally** on your computer and with a **
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/DataStax-Academy/microservices-java-workshop-online)
 
-A new tab opens in your browser at  `https://<your_uid>.<your_region>.gitpod.io/#/workspace/microservices-java-workshop-online`. Those URL are dynamic and we cannot provide clickable links in advance. You should copy-paste `<your_uid>.<your_region>` as we will insert them in each URL  during the exercises.
+A new tab opens in your browser at  `https://<your_uid>.<your_region>.gitpod.io/#/workspace/microservices-java-workshop-online`. These URL's are dynamic and we cannot provide clickable links in advance. You will need to copy-paste `<your_uid>.<your_region>` as we will insert them in each URL during the exercises.
 
 **👁️ Expected output**
 
 ![SplashScreen](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-home.png?raw=true)
 
-**That's it.** Gitpod provides all tools we will need for today including `Maven` and exporting port `8080`. At initialization of the workspace we schedule a `mvn clean install` to download dependencies. You can still download the repository and bookmark it as all materials including slides are part of it.
+**That's it.** Gitpod provides all tools we will need today including `Maven` and exporting port `8080`. At initialization of the workspace we schedule a `mvn clean install` to download dependencies. You can still download the repository and bookmark it as all materials including slides are included.
 
 - ### Option B - Work with Local Environment 💻
 
-This part is dedicated to people will to run the exercises on their laptop. You can skip it and directly go to [2. Run the Todo Application](#2-run-the-todo-application) if you want to work with gitpod.
+This part is dedicated to people running the exercises on their laptop. You can skip it and go directly to [2. Run the Todo Application](#2-run-the-todo-application) if you are using gitpod.
 
 **✅ (local env) Clone the repository :** : With `git` or through the web UI clone the repo
 ```bash
