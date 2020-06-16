@@ -229,7 +229,7 @@ Back the client UI change the URL to match you backend URL :
 
 *Ok I changed a little bit the values but now this is working....* 
 
-![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.png?raw=true)
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
 [🏠 Back to Table of Content](#table-of-content)
 
@@ -305,12 +305,14 @@ With the 3 fields below you can pick any name, simply REMIND them, they will be 
 - Import the file in studio with a drag and drop in the Datastax studio window
 
 *Importing*
+
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/launch-studio-import.png?raw=true)
 
-*File is now open*
+*File is now opened*
+
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/launch-studio-open.png?raw=true)
 
-![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.png?raw=true)
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
 
 [🏠 Back to Table of Content](#table-of-content)
@@ -326,42 +328,83 @@ With our `Cassandra-as-a-service` instance ready let's connect from our applicat
 
 Save the file in a path you will remind, again we will need it for the next exercises.
 
-**✅ Upload the zip in `gitpod`** : If you are working with gitpod the `secure connect bundle` needs to be uploaded there.
+**✅ Step 4b. Upload the zip in `gitpod`** : If you are working with gitpod the `secure connect bundle` needs to be uploaded there.
 
 - Go to `File > Upload Files...`, locate the `zip` and import.
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-upload-files.png?raw=true)
 
-- You can now see the file in the resources tree:
+- You can now see the file in the resources tree
+
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-updated.png?raw=true)
 
-Here my file path is now `/workspace/microservices-java-workshop-online/secure-connect-dev-workshop-db.zip` because my db names `dev-workshop-db` was remember we will need this
+The file path is located at `/workspace/microservices-java-workshop-online/secure-connect-dev-workshop-db.zip` (because my db name is  `dev-workshop-db`).
 
 
+**✅ Step 4c. Fix unit test `ConnectivityToAstraExplicitTest.java`**
 
+- Unit Tests are located in `src/test/java` [HERE](./todobackend-cassandra/src/test/java/com/datastax/samples/astra). Open the file `ConnectivityToAstraExplicitTest` and fill the properties with your Astra informations.
 
-**✅ Fix unit test `ConnectivityToAstraExplicitTest.java` ** :
+*Do not copy-paste - this is a sample for me.*
+```java
+public static String ASTRA_ZIP_FILE = "/Users/cedricklunven/Downloads/secure-connect-dev-workshop-db.zip";
+public static String ASTRA_USERNAME = "todouser";
+public static String ASTRA_PASSWORD = "todopassword";
+public static String ASTRA_KEYSPACE = "todoapp";
+```
 
-
-- Run the test
+- You can now run the UNIT TEST with your IDE or Maven in a terminal (easier with gitpod)
 ```bash
 mvn test -Dtest=com.datastax.samples.astra.ConnectivityToAstraExplicitTest#should_connect_to_Astra_static
 ```
 
+**👁️ Expected output**
 
+```bash
+11:56:30.791 [35mINFO [0;39m [36mcom.datastax.samples.astra.ConnectivityToAstraExplicitTest[0;39m :  + [OK] - Connection Established to Astra with Keyspace todoapp
+```
 
+**✅ Step 4d. Fix unit test `ConnectivityToAstraWithConfTest.java`**
 
-**✅ Fix unit test `ConnectivityToAstraWithConfTest.java` ** :
+Providing the parameter in static way is useful for tests but we can do better but externalizing to a configuration file here `application_test.conf`. Open the file and edit with your Astra informations.
 
+*Do not copy-paste - this is a sample for me.*
+```json
+datastax-java-driver {
+  basic {
+    request {
+       timeout     = 5 seconds
+       consistency = LOCAL_QUORUM
+        page-size = 5000
+    }
+    session-keyspace = todoapp
+    cloud {
+      secure-connect-bundle = /workspace/microservices-java-workshop-online/secure-connect-dev-workshop-db.zip
+    }
+  }
+  advanced {
+    auth-provider {
+      class = PlainTextAuthProvider
+      username = todouser 
+      password = todopassword
+    }
+  }
+}
+```
 
+- You can now run the UNIT TEST with your IDE or Maven in a terminal (easier with gitpod)
 
-- Run the test
 ```bash
 mvn test -Dtest=com.datastax.samples.astra.ConnectivityToAstraWithConfTest#should_connect_to_Astra_withConfig
 ```
 
-**✅ Fix unit test `CreateSchemaInAstraTest` ** :
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
+[🏠back to table of content](#table-of-content)
+
+## 5. CRUD Repository
+
+Good. It is now time to define the proper data model. With the explanations coming from the slides you know this is the table we are looking for 
 
 ```sql
 CREATE TABLE todoapp.todo_tasks (
@@ -372,52 +415,62 @@ CREATE TABLE todoapp.todo_tasks (
 );
 ```
 
+**✅ Fix unit test `CreateSchemaInAstraTest`** :
+
+
+
+
 - Run the test
 ```bash
 mvn test -Dtest=com.datastax.samples.astra.CreateSchemaInAstraTest#should_create_expected_table
 ```
 
 
-**✅ Check that the table `todoapp.todo_tasks` now exist ** :
+**✅ Check that the table `todoapp.todo_tasks` now exist**
 
-**✅ Create bean `CqlSession` in the application ** :
+**✅ Create bean `CqlSession` in the application**
 
 
-[🏠back to table of content](#table-of-content)
+**✅ Restart the application**
 
-## 5. CRUD Repository
+**✅ Fix Unit Test `CrudWithSimpleStatementTest`**
 
-**✅ Fix Unit Test `CrudWithSimpleStatementTest` ** :
+**✅ Change injection dependency in `TodoListRestController`**
 
-**✅ Change injection dependency in `TodoListRestController` ** :
 
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
 [🏠back to table of content](#table-of-content)
 
 ## 6. CRUD Repository with Object Mapper
 
-**✅ Change dependency injection in `TodoListRestController` ** :
+**✅ Change dependency injection in `TodoListRestController`**
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
  
 [🏠back to table of content](#table-of-content)
 
 ## 7. CRUD Repository with Spring Data
 
-**✅ Cassandra Configuration ** :
+**✅ Cassandra Configuration**
 
-**✅ Change dependency injection in `TodoListRestController` ** :
+**✅ Change dependency injection in `TodoListRestController`**
 
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
 [🏠back to table of content](#table-of-content)
 
 ## 8. Going Reactive
 
-**✅ Location project 2
+**✅ Locate project `todo-backend-reactive`** Stop first application to stop the new one (they are using the sane port)
 
-**✅ Change dependency injection in `TodoListRestController` ** :
+**✅ Change dependency injection in `TodoListRestController`**
 
 
 [🏠back to table of content](#table-of-content)
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
 THE END.
 
