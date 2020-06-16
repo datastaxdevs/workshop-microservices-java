@@ -318,13 +318,25 @@ With the 3 fields below you can pick any name, simply REMIND them, they will be 
 
 ## 4. Connectivity to Astra
 
-With `Cassandra-as-a-service` ready let's connect from our application
+With our `Cassandra-as-a-service` instance ready let's connect from our application.
 
-**✅ Download the secure connect bundle** : On the home page of your DB first refresh (the download link will be valid 5 min we want to be sure we don't reach the timeout). Locate link `Download secure connect bundle` and click. You should download a file named `secure-connect-<your_db_name>.zip`. Please remind the location of the file.
+**✅ Step 4a. Download the secure connect bundle** : Go to home page. Process to a `refresh` (F5) of the page (the download link will be valid 5 min we want to be sure we don't reach the timeout). Locate link `Download secure connect bundle` and click. You should download a file named `secure-connect-<your_db_name>.zip`. Please remind the location of the file.
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-7.png?raw=true)
 
-**✅ Upload the zip in `gitpod` ** :
+Save the file in a path you will remind, again we will need it for the next exercises.
+
+**✅ Upload the zip in `gitpod`** : If you are working with gitpod the `secure connect bundle` needs to be uploaded there.
+
+- Go to `File > Upload Files...`, locate the `zip` and import.
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-upload-files.png?raw=true)
+
+- You can now see the file in the resources tree:
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-updated.png?raw=true)
+
+Here my file path is now `/workspace/microservices-java-workshop-online/secure-connect-dev-workshop-db.zip` because my db names `dev-workshop-db` was remember we will need this
+
 
 
 
