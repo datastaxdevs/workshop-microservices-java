@@ -260,7 +260,7 @@ Back the client UI change the URL to match you backend URL :
 
 - **Fill in the database name** - Proposed value `dev-workshop-db`. You can use any alphanumeric value it is not part of the connection fields. Now it will be part of a file downloaded later and you should avoid capital letters.
 
-With the 3 fields below you can pick any name, simply REMIND them, they will be required both to connect `and do the exercises.
+With the 3 fields below you can pick any name, simply REMIND them, they will be required both to connect and do the exercises.
 
 - **Fill in the keyspace name** - Proposed value `todoapp` (no spaces, alpha numeric)
 
@@ -469,9 +469,13 @@ Locate the method `testInsert()` and provide the `CQL Statement`
 - copy-paste the content of file `src/test/resources/application_test.conf` to `src/test/resources/application.conf`
 
 
-**✅ Step e. Change injection dependency in `TodoListRestController`**
+**✅ Step 5e. Change injection dependency in `TodoListRestController`**
 
-- [`TodoListRepository`](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java) is an interface to design the CRUD operations for tasks. Locate the file `TodoListRestController` [here](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java).  As you can see we are specifically picking `todobackend.repo.inmemory` change it to `todobackend.repo.cassandra-driver` by commenting/uncommenting proper lines.
+- [`TodoListRepository`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepository.java) is an interface to design the CRUD operations for tasks. Locate the controller [`TodoListRestController`](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java).  
+
+- As you can see we are specifically picking `todobackend.repo.inmemory`. Change it to `todobackend.repo.cassandra-driver` by commenting/uncommenting proper lines. 
+
+**👁️ Expected code **
 
 ```java
 @Autowired
@@ -481,12 +485,17 @@ Locate the method `testInsert()` and provide the `CQL Statement`
 // @Qualifier("todobackend.repo.spring-data-cassandra")
 private TodoListRepository todoRepository;
 ```
-Now we now how we will switch from one implementation to another. Take a look at class `TodoListRepositoryCassandraDriverImpl` implementing 
 
-**✅ Step 5f. Restart the application**
+Now we now how we will switch from one implementation to another. Take a look at class [`TodoListRepositoryCassandraDriverImpl`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepositoryCassandraDriverImpl.java) implementing the `TodoListRepository` to see how we proceed.
 
-**✅ Step 5g. Test the application connected to ASTRA.**
+**✅ Step 5f. Restart the application**: Use the `CTRL+C` shortcut on the terminal window to stop running the application and restart.
 
+**✅ Step 5g. Test the application connected to ASTRA.** we wil now reuse the provided clientto work with our backend API now connected to ASTRA !.
+
+- 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/)
+ 
+
+- ☁️ If you are using gitpod `https://www.todobackend.com/client/index.html?https://8080-<your_id>.<your_region>-eu01.gitpod.io/api/v1/todos/`
 
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
@@ -495,18 +504,66 @@ Now we now how we will switch from one implementation to another. Take a look at
 
 ## 6. CRUD Repository with Object Mapper
 
-**✅ Change dependency injection in `TodoListRestController`**
+
+**✅ Step 6a. Change injection dependency in `TodoListRestController`**: We have create other implementations for you this time using Object Mapper.
+
+- In controller [`TodoListRestController`](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java) nowChange `@Qualifier` to  to `todobackend.repo.cassandra-object-mapper` by commenting/uncommenting proper lines. 
+
+**👁️ Expected code **
+
+```java
+@Autowired
+//@Qualifier("todobackend.repo.inmemory")
+//@Qualifier("todobackend.repo.cassandra-driver")
+@Qualifier("todobackend.repo.cassandra-object-mapper")
+// @Qualifier("todobackend.repo.spring-data-cassandra")
+private TodoListRepository todoRepository;
+```
+
+Now we now how we will switch from one implementation to another. Take a look at class [`TodoListRepositoryObjectMapperImpl`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepositoryObjectMapperImpl.java) implementing the `TodoListRepository` to see how we proceed.
+
+**✅ Step 6b. Restart the application**: Use the `CTRL+C` shortcut on the terminal window to stop running the application and restart.
+
+**✅ Step 6c. Test the application connected to ASTRA.** we wil now reuse the provided clientto work with our backend API now connected to ASTRA !.
+
+- 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/)
+
+- ☁️ If you are using gitpod `https://www.todobackend.com/client/index.html?https://8080-<your_id>.<your_region>-eu01.gitpod.io/api/v1/todos/`
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
-
  
 [🏠back to table of content](#table-of-content)
 
 ## 7. CRUD Repository with Spring Data
 
-**✅ Cassandra Configuration**
+**✅ 7.a Change cassandra configuration**:
 
-**✅ Change dependency injection in `TodoListRestController`**
+- Comment annotation `@Configuration` in `CassandraDriverConfig.java` class
+
+**✅ Step 7b. Change injection dependency in `TodoListRestController`**: We have create other implementations for you this time using Spring Data.
+
+- In controller [`TodoListRestController`](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java) nowChange `@Qualifier` to `todobackend.repo.spring-data-cassandra` by commenting/uncommenting proper lines. 
+
+**👁️ Expected code **
+
+```java
+@Autowired
+//@Qualifier("todobackend.repo.inmemory")
+//@Qualifier("todobackend.repo.cassandra-driver")
+//@Qualifier("todobackend.repo.cassandra-object-mapper")
+@Qualifier("todobackend.repo.spring-data-cassandra")
+private TodoListRepository todoRepository;
+```
+
+Now we now how we will switch from one implementation to another. Take a look at class [`TodoListRepositorySpringDataImpl`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepositorySpringDataImpl.java) implementing the `TodoListRepository` to see how we proceed.
+
+**✅ Step 7c. Restart the application**: Use the `CTRL+C` shortcut on the terminal window to stop running the application and restart.
+
+**✅ Step 7d. Test the application connected to ASTRA.** we wil now reuse the provided clientto work with our backend API now connected to ASTRA !.
+
+- 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/)
+
+- ☁️ If you are using gitpod `https://www.todobackend.com/client/index.html?https://8080-<your_id>.<your_region>-eu01.gitpod.io/api/v1/todos/`
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
@@ -514,9 +571,26 @@ Now we now how we will switch from one implementation to another. Take a look at
 
 ## 8. Going Reactive
 
-**✅ Locate project `todo-backend-reactive`** Stop first application to stop the new one (they are using the sane port)
+**✅ 8a. Stop existing app and setup `todo-backend-reactive`** 
 
-**✅ Change dependency injection in `TodoListRestController`**
+- Stop first application to stop the new one (they are using the sane port)
+
+- Change `application.conf` in `todo-cassandra-reactive` project
+
+**✅ 8b. Start application `todo-backend-reactive`** As before this is an Maven application to start it you can.
+
+```bash
+cd todo-cassandra-reactive
+
+mvn spring-boot:run
+```
+
+**✅ 8c. Back to the application** Yet another time test that the WEB UI is still working.
+
+
+- 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/)
+
+- ☁️ If you are using gitpod `https://www.todobackend.com/client/index.html?https://8080-<your_id>.<your_region>-eu01.gitpod.io/api/v1/todos/`
 
 
 [🏠back to table of content](#table-of-content)
@@ -524,7 +598,6 @@ Now we now how we will switch from one implementation to another. Take a look at
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
 THE END.
-
 
 
 
