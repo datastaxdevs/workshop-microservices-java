@@ -43,6 +43,8 @@ There are 2 ways to do the exercises, **locally** on your computer and with a **
 
 A new tab opens in your browser at  `https://<your_uid>.<your_region>.gitpod.io/#/workspace/microservices-java-workshop-online`. These URL's are dynamic and we cannot provide clickable links in advance. You will need to copy-paste `<your_uid>.<your_region>` as we will insert them in each URL during the exercises.
 
+AUTO SAVED is **not enabled** by default, when you WILL DO CHANGES PLEASE REMEMBERB TO SAVE THEM with shortcut `CTRL+S`.
+
 **👁️ Expected output**
 
 ![SplashScreen](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-home.png?raw=true)
@@ -330,7 +332,7 @@ Save the file in a path you will remind, again we will need it for the next exer
 
 **✅ Step 4b. Upload the zip in `gitpod`** : If you are working with gitpod the `secure connect bundle` needs to be uploaded there.
 
-- Go to `File > Upload Files...`, locate the `zip` and import.
+- Select the root folder, name of the project and go to `File > Upload Files...`, locate the `zip` and import. *(in our tests the menu `File>Upload` Files only when a folder is selected).*
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-upload-files.png?raw=true)
 
@@ -353,7 +355,9 @@ public static String ASTRA_PASSWORD = "todopassword";
 public static String ASTRA_KEYSPACE = "todoapp";
 ```
 
-- You can now run the UNIT TEST with your IDE or Maven in a terminal (easier with gitpod)
+*Remember: in Gitpod AUTO-SAVED is **not enabled** by default, when you WILL DO CHANGES PLEASE REMEMBER TO SAVE THEM with shortcut `CTRL+S`.*
+
+- You can now run the UNIT TEST with your IDE or Maven in a terminal (easier with gitpod 
 ```bash
 mvn test -Dtest=com.datastax.samples.astra.ConnectivityToAstraExplicitTest#should_connect_to_Astra_static
 ```
@@ -392,6 +396,8 @@ datastax-java-driver {
 }
 ```
 
+*Remember: in Gitpod AUTO-SAVED is **not enabled** by default, when you WILL DO CHANGES PLEASE REMEMBER TO SAVE THEM with shortcut `CTRL+S`.*
+
 - You can now run the UNIT TEST with your IDE or Maven in a terminal (easier with gitpod)
 
 ```bash
@@ -416,7 +422,7 @@ CREATE TABLE todoapp.todo_tasks (
 ```
 
 
-**✅ Step 5a. Run test `CreateSchemaInAstraTest`** : There are multiple ways to create the table : `DataStax Studio`, `CQL Console` in Astra or even any `Cqlsh` instance with the proper conf file. We will go the Java way with an Integration test. You don't have to code here the test will reuse the same file.
+**✅ Step 5a. Run test `CreateSchemaInAstraTest`** : There are multiple ways to create the table : `DataStax Studio`, `CQL Console` in Astra or even any `Cqlsh` instance with the proper conf file. We will go the Java way with an Integration test. You don't have to code here the test will reuse the same file. Locate [CreateSchemaInAstraTest](./todobackend-cassandra/src/test/java/com/datastax/samples/astra/CreateSchemaInAstraTest.java) browse the code before executing: 
 
 - Run the test
 
@@ -459,7 +465,7 @@ describe keyspace todoapp
 
 **✅ Step 5c. Fix Unit Test `CrudWithCassandraDriverIntegrationTest`:** This is time to insert values into the table and extract values from it.
 
-Locate [CrudWithCassandraDriverIntegrationTest](./todobackend-cassandra/src/test/java/com/datastax/sample/astra/CrudWithCassandraDriverIntegrationTest.java) class and specially method `test_Insert()`. Fix the test
+Locate [CrudWithCassandraDriverIntegrationTest](./todobackend-cassandra/src/test/java/com/datastax/samples/astra/CrudWithCassandraDriverIntegrationTest.java) class and specially method `test_Insert()`. Fix the test
 and execute it with the following command.
 
 
@@ -496,6 +502,8 @@ mvn test -Dtest=com.datastax.samples.astra.CrudWithCassandraDriverIntegrationTes
 
 - copy-paste the content of file `src/test/resources/application_test.conf` to `src/test/resources/application.conf`
 
+*Remember, by default Autosaved is not enabled in Gitpod .... ok you got it now...*
+
 
 **✅ Step 5e. Change injection dependency in `TodoListRestController`**
 
@@ -518,7 +526,7 @@ Now we now how we will switch from one implementation to another. Take a look at
 
 **✅ Step 5f. Restart the application**: Use the `CTRL+C` shortcut on the terminal window to stop running the application and restart.
 
-**✅ Step 5g. Test the application connected to ASTRA.** we wil now reuse the provided clientto work with our backend API now connected to ASTRA !.
+**✅ Step 5g. Test the application connected to ASTRA.** we wills now reuse the provided client to work with our backend API now connected to ASTRA !.
 
 - 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/)
  
