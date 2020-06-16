@@ -361,15 +361,15 @@ mvn test -Dtest=com.datastax.samples.astra.ConnectivityToAstraExplicitTest#shoul
 **👁️ Expected output**
 
 ```bash
-11:56:30.791 [35mINFO [0;39m [36mcom.datastax.samples.astra.ConnectivityToAstraExplicitTest[0;39m :  + [OK] - Connection Established to Astra with Keyspace todoapp
+ConnectivityToAstraExplicitTest:  + [OK] - Connection Established to Astra with Keyspace todoapp
 ```
 
 **✅ Step 4d. Fix unit test `ConnectivityToAstraWithConfTest.java`**
 
 Providing the parameter in static way is useful for tests but we can do better but externalizing to a configuration file here `application_test.conf`. Open the file and edit with your Astra informations.
 
-*Do not copy-paste - this is a sample for me.*
-```json
+*Do not copy-paste*
+```yaml
 datastax-java-driver {
   basic {
     request {
@@ -404,7 +404,7 @@ mvn test -Dtest=com.datastax.samples.astra.ConnectivityToAstraWithConfTest#shoul
 
 ## 5. CRUD Repository
 
-Good. It is now time to define the proper data model. With the explanations coming from the slides you know this is the table we are looking for 
+Good. It is now time to define the proper data model. With the explanations coming from the slides you know this is the table we are looking for :
 
 ```sql
 CREATE TABLE todoapp.todo_tasks (
@@ -415,27 +415,61 @@ CREATE TABLE todoapp.todo_tasks (
 );
 ```
 
-**✅ Fix unit test `CreateSchemaInAstraTest`** :
 
-
-
+**✅ Step 5a. Run test `CreateSchemaInAstraTest`** : There are multiple ways to create the table : `DataStax Studio`, `CQL Console` in Astra or even any `Cqlsh` instance with the proper conf file. We will go the Java way with an Integration tes. Good news you don't have to code here the test will reuse the same file.
 
 - Run the test
+
 ```bash
 mvn test -Dtest=com.datastax.samples.astra.CreateSchemaInAstraTest#should_create_expected_table
 ```
 
+**👁️ Expected output**
 
-**✅ Check that the table `todoapp.todo_tasks` now exist**
+```bash
+CreateSchemaInAstraTest: Connection Established to Astra with Keyspace 'todoapp'
+CreateSchemaInAstraTest: Table 'todo_tasks' has been created (if needed).
+```
 
-**✅ Create bean `CqlSession` in the application**
+**✅ Step 5b. Check that table `todoapp.todo_tasks` now exist**: You can go back to Astra in the notebook we have imported or the `CqlConsole` and execute
 
+```sql
+describe keyspace todoapp
+```
 
-**✅ Restart the application**
+**👁️ Expected output STUDIO**
 
-**✅ Fix Unit Test `CrudWithSimpleStatementTest`**
+- * Locate the notebook*
 
-**✅ Change injection dependency in `TodoListRestController`**
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/locate-studio.png?raw=true)
+
+- * Execute the command*
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/describe-output-studio.png?raw=true)
+
+**👁️ Expected output CQLCONSOLE**
+
+- * Locate the console*
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/locate-cqlconsole.png?raw=true)
+
+- * Execute the command*
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/describe-output-cqlconsole.png?raw=true)
+
+**✅ Step 5c. Fix Unit Test `CrudWithSimpleStatementTest`**
+
+**✅ Step 5d. Create bean `CqlSession` in the application**: 
+
+- Locate the file `CassandraDriverConfig` and un comment the annotation `@Configuration`.
+
+- copy-paste the file `src/test
+**✅ Step e. Change injection dependency in `TodoListRestController`**
+
+**✅ Step 5f. Restart the application**
+
+**✅ Step 5g. Test the application connected to ASTRA.**
+
 
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
