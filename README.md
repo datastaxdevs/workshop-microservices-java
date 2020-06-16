@@ -404,7 +404,7 @@ mvn test -Dtest=com.datastax.samples.astra.ConnectivityToAstraWithConfTest#shoul
 
 ## 5. CRUD Repository
 
-Good. It is now time to define the proper data model. With the explanations coming from the slides you know this is the table we are looking for :
+It is now time to define the data modelin Apache Cassandra. With the explanations coming from the slides you know this is the table we are looking for :
 
 ```sql
 CREATE TABLE todoapp.todo_tasks (
@@ -416,7 +416,7 @@ CREATE TABLE todoapp.todo_tasks (
 ```
 
 
-**✅ Step 5a. Run test `CreateSchemaInAstraTest`** : There are multiple ways to create the table : `DataStax Studio`, `CQL Console` in Astra or even any `Cqlsh` instance with the proper conf file. We will go the Java way with an Integration tes. Good news you don't have to code here the test will reuse the same file.
+**✅ Step 5a. Run test `CreateSchemaInAstraTest`** : There are multiple ways to create the table : `DataStax Studio`, `CQL Console` in Astra or even any `Cqlsh` instance with the proper conf file. We will go the Java way with an Integration test. You don't have to code here the test will reuse the same file.
 
 - Run the test
 

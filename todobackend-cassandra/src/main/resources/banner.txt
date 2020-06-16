@@ -9,4 +9,5 @@ ${AnsiColor.BLUE}         \/     \/             \/       \/     \/     \/       
 ${AnsiColor.CYAN} Backend API implementation of todobackend.com
 ${AnsiColor.CYAN} We are using SpringBoot and Apache Cassandra
 
-${AnsiColor.GREEN} The application is started at ${AnsiColor.RED}http://localhost:8080  
+${AnsiColor.GREEN} The application is started at ${AnsiColor.RED}http://localhost:8080
+ 
