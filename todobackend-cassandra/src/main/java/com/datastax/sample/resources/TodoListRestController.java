@@ -99,8 +99,13 @@ public class TodoListRestController {
             produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TaskResource>> findAll(HttpServletRequest request) {
         logger.info("List all task in the db: {}", request.getRequestURL().toString() + "?" + request.getQueryString());
+        String currentUrl = request.getRequestURL().toString();
+        if (request.isSecure()) {
+            currentUrl = currentUrl.replaceAll("http", "https");
+        }
+        final String taskUrl = currentUrl;
         return ResponseEntity.ok(todoRepository.findAll()
-                .stream().map(dto -> new TaskResource(request.getRequestURL().toString() + dto.getUuid(), dto))
+                .stream().map(dto -> new TaskResource(taskUrl + dto.getUuid(), dto))
                 .collect(Collectors.toList()));
     }
     
