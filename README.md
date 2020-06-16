@@ -500,7 +500,7 @@ mvn test -Dtest=com.datastax.samples.astra.CrudWithCassandraDriverIntegrationTes
 
 - Locate the file `CassandraDriverConfig` and uncomment the annotation `@Configuration`. As you can see we delagate configuration to a file. If we don't provide `DriverConfigLoader` it will use `application.conf`
 
-- copy-paste the content of file `src/test/resources/application_test.conf` to `src/test/resources/application.conf`
+- copy-paste the content of file `src/test/resources/application_test.conf` to `src/main/resources/application.conf`
 
 *Remember, by default Autosaved is not enabled in Gitpod .... ok you got it now...*
 
