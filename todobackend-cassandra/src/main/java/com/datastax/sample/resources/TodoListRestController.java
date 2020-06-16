@@ -93,12 +93,14 @@ public class TodoListRestController {
             @ApiResponse(responseCode = "200",
                          description = "The list has been retrieved even if empty no error", 
                          content = @Content(array = @ArraySchema(schema = @Schema(implementation = TaskResource.class)))) })  
-    @RequestMapping(method = GET,
+    @RequestMapping(
+            value = "/",
+            method = GET,
             produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TaskResource>> findAll(HttpServletRequest request) {
         logger.info("List all task in the db: {}", request.getRequestURL().toString() + "?" + request.getQueryString());
         return ResponseEntity.ok(todoRepository.findAll()
-                .stream().map(dto -> new TaskResource(request.getRequestURL().toString() + "/" + dto.getUuid(), dto))
+                .stream().map(dto -> new TaskResource(request.getRequestURL().toString() + dto.getUuid(), dto))
                 .collect(Collectors.toList()));
     }
     
@@ -110,13 +112,12 @@ public class TodoListRestController {
             description = "Clear the storage", 
             tags = { "todos", "delete" })
     @ApiResponses(value = { @ApiResponse(responseCode = "204", description = "No results") } )  
-    @RequestMapping(method = DELETE)
+    @RequestMapping(value = "/", method = DELETE)
     public ResponseEntity<Void> deleteAll(HttpServletRequest request) {
         logger.info("Delete all task in the db: {}", request.getRequestURL().toString() + "?" + request.getQueryString());
         todoRepository.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    
     
     // --- Unitary operation --
     
@@ -134,6 +135,7 @@ public class TodoListRestController {
             @ApiResponse(responseCode = "400", description = "Title is blank but is mandatory"),
             @ApiResponse(responseCode = "500", description = "An error occur in storage") })
     @RequestMapping(
+            value = "/",
             method = POST,
             produces = APPLICATION_JSON_VALUE, 
             consumes = APPLICATION_JSON_VALUE)
@@ -155,7 +157,7 @@ public class TodoListRestController {
                 taskCreationRequest.getOrder());
         todoRepository.upsert(dto);
         // Created
-        TaskResource bean = new TaskResource(request.getRequestURL().toString() + "/" + dto.getUuid(), dto);
+        TaskResource bean = new TaskResource(request.getRequestURL().toString() + dto.getUuid(), dto);
         return ResponseEntity.created(new URI(bean.getUrl())).body(bean);
     }
     

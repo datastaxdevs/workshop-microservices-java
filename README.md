@@ -207,9 +207,9 @@ INFO] ------------------------------------------------------------------------
 
 **✅ Step 2g. Test our Backend API against the spec runner** : This REST API store data **In memory** but is 100% valid. We can validate by testing the same spec runner as before.
 
-- 💻 If you are on your **laptop** open a browser and navigate to [https://www.todobackend.com/specs/index.html?http://localhost:8080/api/v1/todos](https://www.todobackend.com/specs/index.html?http://localhost:8080/api/v1/todos)
+- 💻 If you are on your **laptop** open a browser and navigate to [https://www.todobackend.com/specs/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/specs/index.html?http://localhost:8080/api/v1/todos/)
 
--  ☁️ If you are on **gitpod** : a popup may show up and redirect you to `https://8080-<your_id>.<>your_region.gitpod.io/api/v1/todos`.
+-  ☁️ If you are on **gitpod** : a popup may show up and redirect you to `https://8080-<your_id>.<>your_region.gitpod.io/api/v1/todos/`.
 
 **👁️ Expected output**
 
@@ -218,10 +218,10 @@ INFO] ------------------------------------------------------------------------
 **✅ Step 2h. Test our Web Client UI against our Backend API** : This is neat, the client and spec runner both work even with URL like `localhost` because this is some `javascript` code executed at client side.
 
 Back the client UI change the URL to match you backend URL :
-- 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos)
+- 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/)
  
 
-- ☁️ If you are using gitpod `https://www.todobackend.com/client/index.html?https://8080-<your_id>.<your_region>-eu01.gitpod.io/api/v1/todos`
+- ☁️ If you are using gitpod `https://www.todobackend.com/client/index.html?https://8080-<your_id>.<your_region>-eu01.gitpod.io/api/v1/todos/`
 
 **👁️ Expected output**
 
@@ -471,7 +471,7 @@ Locate the method `testInsert()` and provide the `CQL Statement`
 
 **✅ Step e. Change injection dependency in `TodoListRestController`**
 
-- Locate the file `TodoListRestController` [here](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java). `TodoListRepository` is an interface to design the CRUD operations for tasks. As you can see we are specifically picking `todobackend.repo.inmemory` change it to `todobackend.repo.cassandra-driver` by commenting/uncommenting proper lines.
+- [`TodoListRepository`](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java) is an interface to design the CRUD operations for tasks. Locate the file `TodoListRestController` [here](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java).  As you can see we are specifically picking `todobackend.repo.inmemory` change it to `todobackend.repo.cassandra-driver` by commenting/uncommenting proper lines.
 
 ```java
 @Autowired
