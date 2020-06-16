@@ -11,7 +11,10 @@
 
 `Cassandra Developer Workshorp` are an interactive experiences. Advocates share some knowledge about  Apache Cassandra™ database and you can interact with them through chats *([youtube](https://www.youtube.com/channel/UCAIQY251avaMv7bBv5PCo-A) and [discord](https://discord.com/widget?id=685554030159593522&theme=dark))*, quizzes (menti.com), and  exercises.
 
-We will create a 
+Today we are creating the Todo Application with storage in to Apache Cassandra™.
+
+![Home](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/home.png?raw=true)
+
 
 # Table of Content
 For simplicity all exercises instructions are listed in a single `README.MD` document. As it is quite long we provide you a table of content is provided and after each chapter you can go back to it.
@@ -20,13 +23,13 @@ For simplicity all exercises instructions are listed in a single `README.MD` doc
 |---|---|
 | **Slide deck** | [Slidedeck for the workshop](4-materials/presentation.pdf) |
 | **1. Bootstrapping** | [Setup your environment](#1-bootstrapping) |
-| **2. Run the Todo Application** | [Exercise 2](#2-run-the-todo-application) |
-| **3. Create your Astra instance** | [Exercise 3](#3-create-your-astra-instance) |
+| **2. Run the Todo Application** | [Run the Todo Application](#2-run-the-todo-application) |
+| **3. Create your Astra instance** | [Create your Astra instance](#3-create-your-astra-instance) |
 | **4. Connectivity to Astra** | [Connectivity to Cassandra](#4-connectivity-to-astra) |
 | **5. CRUD Repository** | [Implement CRUD Repository](#5-crud-repository) |
-| **5. CRUD Repository Object Mapper** | [Run and Test the API](#6-crud-repository-with-object-mapper) |
-| **6. CRUD Repository Spring Data** | [Spring DATA](#7-crud-repository-with-spring-data) |
-| **7. Going Reactive** | [Spring Webflux](#8-going-reactive) |
+| **6. CRUD Repository Object Mapper** | [Test Object Mapper](#6-crud-repository-with-object-mapper) |
+| **7. CRUD Repository Spring Data** | [Test with Spring DATA](#7-crud-repository-with-spring-data) |
+| **8. Going Reactive** | [Going Reactive](#8-going-reactive) |
 
 ## 1. Bootstrapping
 
@@ -41,6 +44,7 @@ There are 2 ways to do the exercises, **locally** on your computer and with a **
 A new tab opens in your browser at  `https://<your_uid>.<your_region>.gitpod.io/#/workspace/microservices-java-workshop-online`. Those URL are dynamic and we cannot provide clickable links in advance. You should copy-paste `<your_uid>.<your_region>` as we will insert them in each URL  during the exercises.
 
 **👁️ Expected output**
+
 ![SplashScreen](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/gitpod-home.png?raw=true)
 
 **That's it.** Gitpod provides all tools we will need for today including `Maven` and exporting port `8080`. At initialization of the workspace we schedule a `mvn clean install` to download dependencies. You can still download the repository and bookmark it as all materials including slides are part of it.
@@ -49,7 +53,7 @@ A new tab opens in your browser at  `https://<your_uid>.<your_region>.gitpod.io/
 
 This part is dedicated to people will to run the exercises on their laptop. You can skip it and directly go to [2. Run the Todo Application](#2-run-the-todo-application) if you want to work with gitpod.
 
-**✅ Clone the repository :** : With `git` or through the web UI clone the repo
+**✅ (local env) Clone the repository :** : With `git` or through the web UI clone the repo
 ```bash
 # Clone the current repository
 git clone https://github.com/DataStax-Academy/microservices-java-workshop-online.git
@@ -58,18 +62,18 @@ git clone https://github.com/DataStax-Academy/microservices-java-workshop-online
 cd microservices-java-workshop-online
 ```
 
-**✅ Install Java (JDK8+)** Pick the proper infos based on your operating system
-- ![Windows](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/windows32.png?raw=true) Please use the following tutorial [Installation of the JDK on Microsoft Windows Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-microsoft-windows-platforms.html#GUID-A7E27B90-A28D-4237-9383-A58B416071CA)
-- ![linux](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/linux32.png?raw=true) Please use the following tutorial [Installation of the JDK on Linux Platform Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html#GUID-737A84E4-2EFF-4D38-8E60-3E29D1B884B8)
-- ![osx](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/mac32.png?raw=true) Please use the following tutorial [Installation of the JDK on MACOS Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html#GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE) or with [homebrew](https://docs.brew.sh/Installation):
+**✅ (local env)  Install Java (JDK8+)** Pick the proper infos based on your operating system
+- ![Windows](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/windows32.png?raw=true) Please use the following tutorial [Installation of the JDK on Microsoft Windows Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-microsoft-windows-platforms.html#GUID-A7E27B90-A28D-4237-9383-A58B416071CA)
+- ![linux](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/linux32.png?raw=true) Please use the following tutorial [Installation of the JDK on Linux Platform Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html#GUID-737A84E4-2EFF-4D38-8E60-3E29D1B884B8)
+- ![osx](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/mac32.png?raw=true) Please use the following tutorial [Installation of the JDK on MACOS Platforms](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html#GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE) or with [homebrew](https://docs.brew.sh/Installation):
 ```bash
 brew cask install java
 ```
 
-**✅ Install Maven**
-- ![Windows](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/windows32.png?raw=true) Please use the following tutorial [How to install Maven on Windows](#https://mkyong.com/maven/how-to-install-maven-in-windows/)
-- ![linux](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/linux32.png?raw=true). For CentOS you can use: `sudo yum install maven`
-- ![osx](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/mac32.png?raw=true) For MacOS you can use `brew install maven`
+**✅ (local env) Install Maven**
+- ![Windows](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/windows32.png?raw=true) Please use the following tutorial [How to install Maven on Windows](https://mkyong.com/maven/how-to-install-maven-in-windows)
+- ![linux](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/linux32.png?raw=true). For CentOS you can use: `sudo yum install maven`
+- ![osx](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/mac32.png?raw=true) For MacOS you can use `brew install maven`
 
 Validate installation
 ```bash
@@ -85,7 +89,7 @@ Default locale: en_FR, platform encoding: UTF-8
 OS name: "mac os x", version: "10.15.3", arch: "x86_64", family: "mac"
 ```
 
-**✅ Install an IDE**
+**✅ (local env)  Install an IDE**
 
 Pick and install your favourite Java IDE. Here are some propositions without preference order.
 
@@ -96,82 +100,6 @@ Pick and install your favourite Java IDE. Here are some propositions without pre
 | **Core Eclipse** | 📥[Download Eclipse](https://www.eclipse.org/downloads/)
 | **Visual Studio Code** | 📥[Downlowd Visual Code](https://code.visualstudio.com/Download)
 
-**✅ Install Docker** (=not for today, to run Cassandra Locally)
-
-Docker is an open-source project that automates the deployment of software applications inside containers by providing an additional layer of abstraction and automation of OS-level virtualization on Linux.
-
-- ![Windows](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/windows32.png?raw=true) : To install on **windows** please use the following installer [Docker Dekstop for Windows Installer](https://download.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
-
-- ![osx](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/mac32.png?raw=true) : To install on **MAC OS**  use [Docker Dekstop for MAC Installer](https://download.docker.com/mac/stable/Docker.dmg) or [homebrew](https://docs.brew.sh/Installation) with following commands:
-```bash
-# Fetch latest version of homebrew and formula.
-brew update              
-# Tap the Caskroom/Cask repository from Github using HTTPS.
-brew tap caskroom/cask                
-# Searches all known Casks for a partial or exact match.
-brew search docker                    
-# Displays information about the given Cask
-brew cask info docker
-# Install the given cask.
-brew cask install docker              
-# Remove any older versions from the cellar.
-brew cleanup
-# Validate installation
-docker -v
-```
-
-- ![linux](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/linux32.png?raw=true) : To install on linux (centOS) you can use the following commands
-```bash
-# Remove if already install
-sudo yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-engine
-# Utils
-sudo yum install -y yum-utils
-
-# Add docker-ce repo
-sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-# Install
-sudo dnf -y  install docker-ce --nobest
-# Enable service
-sudo systemctl enable --now docker
-# Get Status
-systemctl status  docker
-
-# Logout....Lougin
-exit
-# Create user
-sudo usermod -aG docker $USER
-newgrp docker
-
-# Validation
-docker images
-docker run hello-world
-docker -v
-```
-
-**✅ Install Docker Compose** (=not for today, to run Cassandra Locally)
-
-Docker Compose is a tool for defining and running multi-container Docker applications. It uses YAML files to configure the application's services and performs the creation and start-up process of all the containers with a single command. The `docker-compose` CLI utility allows users to run commands on multiple containers at once, for example, building images, scaling containers, running containers that were stopped, and more. Please refer to [Reference Documentation](https://docs.docker.com/compose/install/) if you have for more detailed instructions.
-
-- ![Windows](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/windows32.png?raw=true) : Already **included** in the previous package *Docker for Windows*
-
-- ![osx](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/mac32.png?raw=true) : Already **included** in the previous package *Docker for Mac*
-
-- ![linux](https://github.com/DataStax-Academy/kubernetes-workshop-online/blob/master/4-materials/images/linux32.png?raw=true) : To install on linux (centOS) you can use the following commands
-
-```bash
-# Download deliverable and move to target location
-sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-# Allow execution
-sudo chmod +x /usr/local/bin/docker-compose
-```
 
 [🏠back to table of content](#table-of-content)
 
@@ -181,7 +109,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ![TodoMVC](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todomvc.png?raw=true)
 
-**✅ Test todoMVC application** : Access the [http://todomvc.com/](http://todomvc.com/) website and test one application with the framework of your choice.
+**✅ Step 2a. Test todoMVC application** : Access the [http://todomvc.com/](http://todomvc.com/) website and test one application with the framework of your choice.
 
 **Todo-Backend** is a shared example to showcase backend tech stacks. The Todo-Backend project defines a simple web API spec - for managing a todo list. Contributors implement that spec using various tech stacks. Those implementations are cataloged below. A spec runner verifies that each contribution implements the exact same API, by running an automated test suite which defines the API.
 
@@ -192,7 +120,7 @@ There are multiple free implementations available already. Some implementations 
 - `Endpoint#2` : [https://todo-quarkus.herokuapp.com/todos](https://todo-quarkus.herokuapp.com/todos)
 - `Endpoint#3` : [https://todo-backend-micronaut.herokuapp.com/todos](https://todo-backend-micronaut.herokuapp.com/todos)
 
-**✅ Test TodoBackEnd Spec Runner** : Locate the [spec runner](https://www.todobackend.com/specs/index.html) and use one of the `endpoints` listed below to evaluate if API matchs the requirements. To do so copy-paste one URL and click `Run Tests`.
+**✅ Step 2b. Test TodoBackEnd Spec Runner** : Locate the [spec runner](https://www.todobackend.com/specs/index.html) and use one of the `endpoints` listed below to evaluate if API matchs the requirements. To do so copy-paste one URL and click `Run Tests`.
 
 ![TodoBackendTest](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todobackend-runtest.png?raw=true)
 
@@ -202,7 +130,7 @@ There are multiple free implementations available already. Some implementations 
 
 **Note:** *During the live stream you will be hundreds testing the same endpoints so - maybe - we could hit some issues = race conditions.*
 
-**✅ Test TodoBackEnd Web Client** : todoBackend.com provides a [client](https://www.todobackend.com/client/index.html) to work with the API. As before pick one of the `endpoints` listed before and try the client.
+**✅ Step 2c. Test TodoBackEnd Web Client** : todoBackend.com provides a [client](https://www.todobackend.com/client/index.html) to work with the API. As before pick one of the `endpoints` listed before and try the client.
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todobackend-runclient.png?raw=true)
 
@@ -212,14 +140,14 @@ There are multiple free implementations available already. Some implementations 
 
 Our mission withing the next hour is to implement the *backend API* and store  data into Apache Cassandra™. We have you covered by providing the skeleton of the application.
 
-**✅ Start Backend API** : By using a maven command or run application in your IDE
+**✅ Step 2d. Start Backend API** : By using a maven command or run application in your IDE
 
 ```bash
 # Build the project without tests (you did not implemented them yet TDD baby !)
 mvn clean install -Dmaven.test.skip=true
 
 # Navigate to the proper folder
-cd wkshop-microservice-2-spring-boot/
+cd todobackend-cassandra/
 
 # Start the backend API
 mvn spring-boot:run
@@ -261,7 +189,7 @@ INFO] ------------------------------------------------------------------------
 14:55:03.604 INFO  com.datastax.sample.TodoBackendApplication         : Started TodoBackendApplication in 1.075 seconds (JVM running for 1.492)
 ```
 
-**✅ Show Api Documentation** : through your browser
+**✅ Step 2e. Show Api Documentation** : through your browser
 
 - 💻 If you are on your **laptop** : open a browser and navigate to [http://localhost:8080](http://localhost:8080)
 
@@ -271,13 +199,13 @@ INFO] ------------------------------------------------------------------------
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/backend-doc.png?raw=true)
 
-**✅ Test Backend API** :using the OpenAPI generated documentation. You can open the `GET` bloc labeled `/api/v1/todos` and pick `Try It Out`. Then locate `Execute` to test the API  and get a few results.
+**✅ Step 2f. Test Backend API** :using the OpenAPI generated documentation. You can open the `GET` bloc labeled `/api/v1/todos` and pick `Try It Out`. Then locate `Execute` to test the API  and get a few results.
 
 **👁️ Expected output**
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todobackend-swagger-test.png?raw=true)
 
-**✅ Test our Backend API against the spec runner** : This REST API store data **In memory** but is 100% valid. We can validate by testing the same spec runner as before.
+**✅ Step 2g. Test our Backend API against the spec runner** : This REST API store data **In memory** but is 100% valid. We can validate by testing the same spec runner as before.
 
 - 💻 If you are on your **laptop** open a browser and navigate to [https://www.todobackend.com/specs/index.html?http://localhost:8080/api/v1/todos](https://www.todobackend.com/specs/index.html?http://localhost:8080/api/v1/todos)
 
@@ -287,7 +215,7 @@ INFO] ------------------------------------------------------------------------
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/realbackend-test.png?raw=true)
 
-**✅ Test our Web Client UI against our Backend API** : This is neat, the client and spec runner both work even with URL like `localhost` because this is some `javascript` code executed at client side.
+**✅ Step 2h. Test our Web Client UI against our Backend API** : This is neat, the client and spec runner both work even with URL like `localhost` because this is some `javascript` code executed at client side.
 
 Back the client UI change the URL to match you backend URL :
 - 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos)
@@ -301,34 +229,38 @@ Back the client UI change the URL to match you backend URL :
 
 *Ok I changed a little bit the values but now this is working....* 
 
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.png?raw=true)
+
 [🏠 Back to Table of Content](#table-of-content)
 
 ## 3. Create your Astra instance
 
-Access to `ASTRA` service on url [https://astra.datastax.com](https://astra.datastax.com/)
+`ASTRA` service is available at url [https://astra.datastax.com](https://astra.datastax.com/)
 
-**✅  Register (if needed) and Sign In to Astra** : You can use your `Github`, `Google` accounts or register with an `email`
+**✅ Step 3a.Register (if needed) and Sign In to Astra** : You can use your `Github`, `Google` accounts or register with an `email`
 
-- Access [Registration Page](https://astra.datastax.com/register)
+- [Registration Page](https://astra.datastax.com/register)
+
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-register.png?raw=true)
 
-- Access [Authentication Page](https://astra.datastax.com/)
+- [Authentication Page](https://astra.datastax.com/)
+
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-login.png?raw=true)
 
 
-**✅  Fill the Create New Database Form** : As you don't have have any instances the login will route through the instance creation form. You will find below which values to enter for each field.
+**✅ Step 3b. Fill the Create New Database Form** : As you don't have have any instances the login will route through the instance creation form. You will find below which values to enter for each field.
 
-- Access [Authentication Page](https://astra.datastax.com/)
+- *Initialization Form*
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-2.png?raw=true)
 
 
-- **Set the Compute Size**: For the work we are doing please use `Free tier`. You instance will be there forever, free of charge. If you already have a free tier db that you created in a previous workshop (`killrvideo`) you can simply reuse it.
+- **Set the Compute Size**: For the work we are doing please use `Free tier`. You instance will be there forever, free of charge. If you already have a free tier db that you created in a previous workshop (`killrvideo`) you can reuse it.
 
-- **Select the region**: This is the region where your database will reside physically (choose one close to you or your users). For people in EMEA please use `europe-west-1` idea here is to reduce latency.
+- **Select region**: This is the region where your database will reside physically (choose one close to you or your users). For people in EMEA please use `europe-west-1` idea here is to reduce latency.
 
 - **Fill in the database name** - Proposed value `dev-workshop-db`. You can use any alphanumeric value it is not part of the connection fields. Now it will be part of a file downloaded later and you should avoid capital letters.
 
-With the fields below you can pick any names, simply remind them, they will be required both to show `Datastax Studio` and to do the exercises.
+With the 3 fields below you can pick any name, simply REMIND them, they will be required both to connect `and do the exercises.
 
 - **Fill in the keyspace name** - Proposed value `todoapp` (no spaces, alpha numeric)
 
@@ -342,7 +274,7 @@ With the fields below you can pick any names, simply remind them, they will be r
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-3.png?raw=true)
 
-**✅ View your Database and connect** : View your database. It may take 2-3 minutes for your database to spin up. You will receive an email at that point. But, go ahead and continue with the rest of the exercise now.
+**✅ Step 3c. View your Database and connect** : View your database. It may take 2-3 minutes for your database to spin up. You will receive an email at that point. But, go ahead and continue with the rest of the exercise now.
 
 **👁️ Expected output**
 
@@ -352,8 +284,9 @@ With the fields below you can pick any names, simply remind them, they will be r
 *Database is ready*
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-5.png?raw=true)
 
-**✅  Open DataStax Studio** : You can click on `Launch Developer Studio` blue link to enter the tool. Please enter the credentials you used for instance creation. (`todouser`, `todopassword`)
+**✅ Step 3d. Open DataStax Studio** : Locate  `Launch Developer Studio` on the bottom left part of the screen and click on `Launch now`. Please enter the same credentials you used for instance creation.
 
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/launch-studio.png?raw=true)
 
 - **Fill in the Database User name** - `todouser`. Note the user name is case-sensitive. Please use the case we suggest here.
 
@@ -362,6 +295,23 @@ With the fields below you can pick any names, simply remind them, they will be r
 **👁️ Expected output**
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-6.png?raw=true)
+
+**✅ Step 3e. Import a notebook** : DataStax studio should now be opened.
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/launch-studio-home.png?raw=true)
+
+- Download locally the file `datastax-studio-notebook.tar` located in `z-materials/notebooks/datastax-studio-notebook.tar` [here](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/notebooks/datastax-studio-notebook.tar?raw=true)
+
+- Import the file in studio with a drag and drop in the Datastax studio window
+
+*Importing*
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/launch-studio-import.png?raw=true)
+
+*File is now open*
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/launch-studio-open.png?raw=true)
+
+![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.png?raw=true)
+
 
 [🏠 Back to Table of Content](#table-of-content)
 
@@ -377,9 +327,26 @@ With `Cassandra-as-a-service` ready let's connect from our application
 **✅ Upload the zip in `gitpod` ** :
 
 
+
 **✅ Fix unit test `ConnectivityToAstraExplicitTest.java` ** :
 
+
+- Run the test
+```bash
+mvn test -Dtest=com.datastax.samples.astra.ConnectivityToAstraExplicitTest#should_connect_to_Astra_static
+```
+
+
+
+
 **✅ Fix unit test `ConnectivityToAstraWithConfTest.java` ** :
+
+
+
+- Run the test
+```bash
+mvn test -Dtest=com.datastax.samples.astra.ConnectivityToAstraWithConfTest#should_connect_to_Astra_withConfig
+```
 
 **✅ Fix unit test `CreateSchemaInAstraTest` ** :
 
@@ -392,6 +359,13 @@ CREATE TABLE todoapp.todo_tasks (
     title text
 );
 ```
+
+- Run the test
+```bash
+mvn test -Dtest=com.datastax.samples.astra.CreateSchemaInAstraTest#should_create_expected_table
+```
+
+
 **✅ Check that the table `todoapp.todo_tasks` now exist ** :
 
 **✅ Create bean `CqlSession` in the application ** :

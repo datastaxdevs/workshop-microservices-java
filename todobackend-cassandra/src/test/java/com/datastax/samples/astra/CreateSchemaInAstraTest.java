@@ -3,6 +3,8 @@ package com.datastax.samples.astra;
 import java.io.File;
 
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +15,7 @@ import com.datastax.oss.driver.api.core.type.DataTypes;
 import com.datastax.oss.driver.api.querybuilder.SchemaBuilder;
 import com.datastax.sample.model.TodoAppSchema;
 
+@RunWith(JUnitPlatform.class)
 public class CreateSchemaInAstraTest implements TodoAppSchema {
 
     /** Logger for the class. */
@@ -23,7 +26,7 @@ public class CreateSchemaInAstraTest implements TodoAppSchema {
         
         // Config loader from file
         DriverConfigLoader loader = DriverConfigLoader.fromFile(
-                new File(CreateSchemaInAstraTest.class.getResource("/test_astra.conf").getFile()));
+                new File(CreateSchemaInAstraTest.class.getResource("/application_test.conf").getFile()));
         
         // Use it to create the session
         try (CqlSession cqlSession = CqlSession.builder().withConfigLoader(loader).build()) {

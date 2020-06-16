@@ -4,6 +4,8 @@ import java.io.File;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +17,7 @@ import com.datastax.oss.driver.api.core.config.DriverConfigLoader;
  *
  * @author Cedrick LUNVEN (@clunven)
  */
+@RunWith(JUnitPlatform.class)
 public class ConnectivityToAstraWithConfTest {
 
     /** Logger for the class. */
@@ -26,7 +29,7 @@ public class ConnectivityToAstraWithConfTest {
 
         // Config loader from file
         DriverConfigLoader loader = DriverConfigLoader.fromFile(
-                new File(ConnectivityToAstraWithConfTest.class.getResource("/test_astra.conf").getFile()));
+                new File(ConnectivityToAstraWithConfTest.class.getResource("/application_test.conf").getFile()));
         
         // Use it to create the session
         try (CqlSession cqlSession = CqlSession.builder().withConfigLoader(loader).build()) {

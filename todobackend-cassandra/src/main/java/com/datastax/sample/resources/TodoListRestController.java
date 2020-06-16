@@ -63,7 +63,7 @@ public class TodoListRestController {
     
     @Autowired
     @Qualifier("todobackend.repo.inmemory")
-    // @Qualifier("todobackend.repo.cassandra-core")
+    //@Qualifier("todobackend.repo.cassandra-driver")
     // @Qualifier("todobackend.repo.cassandra-object-mapper")
     // @Qualifier("todobackend.repo.spring-data-cassandra")
     private TodoListRepository todoRepository;
@@ -98,7 +98,7 @@ public class TodoListRestController {
     public ResponseEntity<List<TaskResource>> findAll(HttpServletRequest request) {
         logger.info("List all task in the db: {}", request.getRequestURL().toString() + "?" + request.getQueryString());
         return ResponseEntity.ok(todoRepository.findAll()
-                .stream().map(dto -> new TaskResource(request.getRequestURL().toString() + dto.getUuid(), dto))
+                .stream().map(dto -> new TaskResource(request.getRequestURL().toString() + "/" + dto.getUuid(), dto))
                 .collect(Collectors.toList()));
     }
     

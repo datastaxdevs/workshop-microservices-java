@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +18,7 @@ import com.datastax.oss.driver.api.core.CqlSession;
  *
  * @author Cedrick LUNVEN (@clunven)
  */
+@RunWith(JUnitPlatform.class)
 public class ConnectivityToAstraExplicitTest {
 
     /** Logger for the class. */
