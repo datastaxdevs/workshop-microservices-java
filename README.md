@@ -21,7 +21,7 @@ For simplicity all exercises instructions are listed in a single `README.MD` doc
 
 | Sections  | Material Description
 |---|---|
-| **Slide deck** | [Slidedeck for the workshop](4-materials/presentation.pdf) |
+| **Slide deck** | [Slidedeck for the workshop](z-materials/presentation.pdf) |
 | **1. Bootstrapping** | [Setup your environment](#1-bootstrapping) |
 | **2. Run the Todo Application** | [Run the Todo Application](#2-run-the-todo-application) |
 | **3. Create your Astra instance** | [Create your Astra instance](#3-create-your-astra-instance) |
@@ -439,32 +439,49 @@ describe keyspace todoapp
 
 **👁️ Expected output STUDIO**
 
-- * Locate the notebook*
+- Locate the notebook
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/locate-studio.png?raw=true)
 
-- * Execute the command*
+- Execute the command
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/describe-output-studio.png?raw=true)
 
 **👁️ Expected output CQLCONSOLE**
 
-- * Locate the console*
+- Locate the console
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/locate-cqlconsole.png?raw=true)
 
-- * Execute the command*
+- Execute the command
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/describe-output-cqlconsole.png?raw=true)
 
-**✅ Step 5c. Fix Unit Test `CrudWithSimpleStatementTest`**
+**✅ Step 5c. Fix Unit Test `CrudWithSimpleStatementTest`** This is time to insert values into the table and extract values from it. 
+
+Locate the method `testInsert()` and provide the `CQL Statement` 
+
 
 **✅ Step 5d. Create bean `CqlSession` in the application**: 
 
-- Locate the file `CassandraDriverConfig` and un comment the annotation `@Configuration`.
+- Locate the file `CassandraDriverConfig` and uncomment the annotation `@Configuration`. As you can see we delagate configuration to a file. If we don't provide `DriverConfigLoader` it will use `application.conf`
 
-- copy-paste the file `src/test
+- copy-paste the content of file `src/test/resources/application_test.conf` to `src/test/resources/application.conf`
+
+
 **✅ Step e. Change injection dependency in `TodoListRestController`**
+
+- Locate the file `TodoListRestController` [here](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java). `TodoListRepository` is an interface to design the CRUD operations for tasks. As you can see we are specifically picking `todobackend.repo.inmemory` change it to `todobackend.repo.cassandra-driver` by commenting/uncommenting proper lines.
+
+```java
+@Autowired
+//@Qualifier("todobackend.repo.inmemory")
+@Qualifier("todobackend.repo.cassandra-driver")
+// @Qualifier("todobackend.repo.cassandra-object-mapper")
+// @Qualifier("todobackend.repo.spring-data-cassandra")
+private TodoListRepository todoRepository;
+```
+Now we now how we will switch from one implementation to another. Take a look at class `TodoListRepositoryCassandraDriverImpl` implementing 
 
 **✅ Step 5f. Restart the application**
 

@@ -155,7 +155,7 @@ public class TodoListRestController {
                 taskCreationRequest.getOrder());
         todoRepository.upsert(dto);
         // Created
-        TaskResource bean = new TaskResource(request.getRequestURL().toString() + dto.getUuid(), dto);
+        TaskResource bean = new TaskResource(request.getRequestURL().toString() + "/" + dto.getUuid(), dto);
         return ResponseEntity.created(new URI(bean.getUrl())).body(bean);
     }
     
