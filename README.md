@@ -29,7 +29,6 @@ For simplicity all exercise instructions are listed in a single `README.MD` docu
 | **5. CRUD Repository** | [Implement CRUD Repository](#5-crud-repository) |
 | **6. CRUD Repository Object Mapper** | [Test Object Mapper](#6-crud-repository-with-object-mapper) |
 | **7. CRUD Repository Spring Data** | [Test with Spring DATA](#7-crud-repository-with-spring-data) |
-| **8. Going Reactive** | [Going Reactive](#8-going-reactive) |
 
 ## 1. Bootstrapping
 
@@ -609,34 +608,6 @@ Now we now how we will switch from one implementation to another. Take a look at
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
 [🏠back to table of content](#table-of-content)
-
-## 8. Going Reactive
-
-**✅ 8a. Stop existing app and setup `todo-backend-reactive`** 
-
-- Stop first application to stop the new one (they are using the sane port)
-
-- Change `application.conf` in `todo-cassandra-reactive` project
-
-**✅ 8b. Start application `todo-backend-reactive`** As before this is an Maven application to start it you can.
-
-```bash
-cd todo-cassandra-reactive
-
-mvn spring-boot:run
-```
-
-**✅ 8c. Back to the application** Yet another time test that the WEB UI is still working.
-
-
-- 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/)
-
-- ☁️ If you are using gitpod `https://www.todobackend.com/client/index.html?https://8080-<your_id>.<your_region>-eu01.gitpod.io/api/v1/todos/`
-
-
-[🏠back to table of content](#table-of-content)
-
-![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
 THE END.
 

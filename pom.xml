@@ -51,7 +51,6 @@
 
 	<modules>
 		<module>todobackend-cassandra</module>
-		<module>todobackend-cassandra-reactive</module>
 	</modules>
 
 	<dependencyManagement>
