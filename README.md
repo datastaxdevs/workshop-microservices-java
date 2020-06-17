@@ -36,13 +36,15 @@ There are 2 ways to do the exercises, **locally** on your computer and with a **
 
 - ### Option A - Work with a 100% Cloud-based Environment ☁️
 
-**✅ Open gitpod** : [Gitpod](https://www.gitpod.io/) is an IDE 100% online based on Eclipse Theia. To initialize your environment simply click on the button below.
+**✅ Open gitpod** : [Gitpod](https://www.gitpod.io/) is an IDE 100% online based on Eclipse Theia. To initialize your environment simply click on the button below *(CTRL + Click to open in new tab)*
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/DataStax-Academy/microservices-java-workshop-online)
 
-A new tab opens in your browser at  `https://<your_uid>.<your_region>.gitpod.io/#/workspace/microservices-java-workshop-online`. These URL's are dynamic and we cannot provide clickable links in advance. You will need to copy-paste `<your_uid>.<your_region>` as we will insert them in each URL during the exercises.
+Target url looks like  `https://<your_uid>.<your_region>.gitpod.io/#/workspace/microservices-java-workshop-online`. These URL's are dynamic and we cannot provide clickable links in advance. You will need to copy-paste `<your_uid>.<your_region>` as we will insert them in each URL during the exercises.
 
-AUTO SAVED is **not enabled** by default, when you WILL DO CHANGES PLEASE REMEMBERB TO SAVE THEM with shortcut `CTRL+S`.
+```
+⚠️ By default Autosaved is not enabled in Gitpod. Don't forget to save your modifications with CTRL+S
+```
 
 **👁️ Expected output**
 
@@ -202,8 +204,7 @@ mvn spring-boot:run
 
 **✅ Step 2f. Test Backend API** :using the OpenAPI generated documentation. You can open the `GET` bloc labeled `/api/v1/todos/` and pick `Try It Out`. Then locate `Execute` to test the API  and get a few results.
 
-**Note:** *For some resources `/api/v1/todos/{task-id}` you need to provide a valid UUID as a string. You can get the list of valid ones by invoking the operation `GET /api/v1/todos/` first. The default value `6f6c5b47-4e23-4437-ada8-d0a6f79330a2` should work. *
-
+**Note:** *For some resources `/api/v1/todos/{task-id}` you need to provide a valid UUID as a string. You can get the list of valid ones by invoking the operation `GET /api/v1/todos/` first. The default value `6f6c5b47-4e23-4437-ada8-d0a6f79330a2` should work.*
 
 **👁️ Expected output**
 
@@ -222,16 +223,16 @@ mvn spring-boot:run
 **✅ Step 2h. Test our Web Client UI against our Backend API** : This is neat, the client and spec runner both work even with URL like `localhost` because this is some `javascript` code executed at client side.
 
 Back the client UI change the URL to match you backend URL :
+
 - 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/)
  
-
 - ☁️ If you are using gitpod `https://www.todobackend.com/client/index.html?https://8080-<your_id>.<your_region>-eu01.gitpod.io/api/v1/todos/`
 
 **👁️ Expected output**
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/backend-ok.png?raw=true)
 
-*Ok I changed a little bit the values but now this is working....* 
+*HAHA OK, I changed a little bit the values but now this is working....* 
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/welldone.jpg?raw=true)
 
@@ -357,7 +358,9 @@ public static String ASTRA_PASSWORD = "todopassword";
 public static String ASTRA_KEYSPACE = "todoapp";
 ```
 
-*Remember: in Gitpod AUTO-SAVED is **not enabled** by default, when you WILL DO CHANGES PLEASE REMEMBER TO SAVE THEM with shortcut `CTRL+S`.*
+```
+⚠️ By default Autosaved is not enabled in Gitpod. Don't forget to save your modifications with CTRL+S
+```
 
 - You can now run the UNIT TEST with your IDE or Maven in a terminal (easier with gitpod 
 ```bash
@@ -398,7 +401,9 @@ datastax-java-driver {
 }
 ```
 
-*Remember: in Gitpod AUTO-SAVED is **not enabled** by default, when you WILL DO CHANGES PLEASE REMEMBER TO SAVE THEM with shortcut `CTRL+S`.*
+```
+⚠️ By default Autosaved is not enabled in Gitpod. Don't forget to save your modifications with CTRL+S
+```
 
 - You can now run the UNIT TEST with your IDE or Maven in a terminal (easier with gitpod)
 
@@ -412,7 +417,7 @@ mvn test -Dtest=com.datastax.samples.astra.ConnectivityToAstraWithConfTest#shoul
 
 ## 5. CRUD Repository
 
-It is now time to define the data modelin Apache Cassandra. With the explanations coming from the slides you know this is the table we are looking for :
+It is now time to define the data model in Apache Cassandra. With the explanations coming from the slides you know this is the table we are looking for :
 
 ```sql
 CREATE TABLE todoapp.todo_tasks (
@@ -422,7 +427,6 @@ CREATE TABLE todoapp.todo_tasks (
     title text
 );
 ```
-
 
 **✅ Step 5a. Run test `CreateSchemaInAstraTest`** : There are multiple ways to create the table : `DataStax Studio`, `CQL Console` in Astra or even any `Cqlsh` instance with the proper conf file. We will go the Java way with an Integration test. You don't have to code here the test will reuse the same file. Locate [CreateSchemaInAstraTest](./todobackend-cassandra/src/test/java/com/datastax/samples/astra/CreateSchemaInAstraTest.java) browse the code before executing: 
 
@@ -439,7 +443,8 @@ CreateSchemaInAstraTest: Connection Established to Astra with Keyspace 'todoapp'
 CreateSchemaInAstraTest: Table 'todo_tasks' has been created (if needed).
 ```
 
-**✅ Step 5b. Check that table `todoapp.todo_tasks` now exist**: You can go back to Astra in the notebook we have imported or the `CqlConsole` and execute
+**✅ Step 5b. Check that table `todoapp.todo_tasks` now exist**: You can go back to Astra in the notebook we have imported or the `CqlConsole` and execute. This is the reason we made you import the noteboolk it is 
+quite visual and you can execute some `CQL` commands easily.
 
 ```sql
 describe keyspace todoapp
@@ -465,11 +470,9 @@ describe keyspace todoapp
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/describe-output-cqlconsole.png?raw=true)
 
-**✅ Step 5c. Fix Unit Test `CrudWithCassandraDriverIntegrationTest`:** This is time to insert values into the table and extract values from it.
+**✅ Step 5c. Fix Unit Test `CrudWithCassandraDriverIntegrationTest`:** We will insert values into the table and extract values from it.
 
-Locate [CrudWithCassandraDriverIntegrationTest](./todobackend-cassandra/src/test/java/com/datastax/samples/astra/CrudWithCassandraDriverIntegrationTest.java) class and specially method `test_Insert()`. Fix the test
-and execute it with the following command.
-
+Locate [CrudWithCassandraDriverIntegrationTest](./todobackend-cassandra/src/test/java/com/datastax/samples/astra/CrudWithCassandraDriverIntegrationTest.java#L66) class and specially method `test_Insert()`. Fix the test and execute it with the following commands.
 
 - Execute your test (solution is provided at the bottom of the class)
 
@@ -477,8 +480,7 @@ and execute it with the following command.
 mvn test -Dtest=com.datastax.samples.astra.CrudWithCassandraDriverIntegrationTest#test_Insert
 ```
 
-- Solution
-
+*Here is the solution*
 ```java
 SimpleStatement stmtInsertTask = SimpleStatement.builder(""
        + "INSERT INTO todo_tasks(uid, title, offset, completed)" 
@@ -491,21 +493,29 @@ SimpleStatement stmtInsertTask = SimpleStatement.builder(""
 cqlSession.execute(stmtInsertTask);
 ```
 
- - There is another test in the same class to test all options: 
+```
+⚠️ By default Autosaved is not enabled in Gitpod. Don't forget to save your modifications with CTRL+S
+```
+
+ - There is another test in the same class to test all CRUD operations you can test: 
 
 ```bash
 mvn test -Dtest=com.datastax.samples.astra.CrudWithCassandraDriverIntegrationTest#should_create_task_with_new_uid
 ```
 
-
 **✅ Step 5d. Create bean `CqlSession` in the application**: 
 
-- Locate the file `CassandraDriverConfig` and uncomment the annotation `@Configuration`. As you can see we delagate configuration to a file. If we don't provide `DriverConfigLoader` it will use `application.conf`
+- Locate the file `CassandraDriverConfig` [here](./todobackend-cassandra/src/main/java/com/datastax/sample/conf/CassandraDriverConfig.java) and uncomment the annotation `@Configuration`. As you can see we delegate the configuration to a file. If we don't provide a `DriverConfigLoader` it will use `application.conf`
 
-- copy-paste the content of file `src/test/resources/application_test.conf` to `src/main/resources/application.conf`
+- Copy-paste the content of file `src/test/resources/application_test.conf` to `src/main/resources/application.conf`
 
-*Remember, by default Autosaved is not enabled in Gitpod .... ok you got it now...*
+```bash
+cp todobackend-cassandra/src/test/resources/application_test.conf todobackend-cassandra/src/main//resources/application.conf 
+```
 
+```
+⚠️ By default Autosaved is not enabled in Gitpod. Don't forget to save your modifications with CTRL+S
+```
 
 **✅ Step 5e. Change injection dependency in `TodoListRestController`**
 
