@@ -110,7 +110,7 @@ Pick and install your favourite Java IDE. Here are some propositions without pre
 
 ![TodoMVC](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todomvc.png?raw=true)
 
-**✅ Step 2a. Visit [TodoMVC.com](http://todomvc.com/) to discover what we are building today ** : We want you to see what it look like before starting anything. So simply access the URL [http://todomvc.com/](http://todomvc.com/) and browse. You will see that there are multiple implementations, pick one of those and test it live in your browser.
+**✅ Step 2a. Visit [TodoMVC.com](http://todomvc.com/) to discover what we are building today** : We want you to see what it look like before starting anything. So simply access the URL [http://todomvc.com/](http://todomvc.com/) and browse. You will see that there are multiple implementations, pick one of those and test it live in your browser.
 
 
 **Todo-Backend** is a shared example to showcase backend tech stacks. The Todo-Backend project defines a simple web API spec - for managing a todo list. Contributors implement that spec using various tech stacks. Those implementations are cataloged below. A spec runner verifies that each contribution implements the exact same API, by running an automated test suite which defines the API.
@@ -127,7 +127,7 @@ There are multiple free implementations available. Some implementations provide 
 
 ![TodoBackendTest](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/todobackend-runtest.png?raw=true)
 
-Sample:
+*Sample URL*
 ```
 https://www.todobackend.com/specs/index.html?https://todo-back-springboot220-java12.herokuapp.com/todos
 ```
@@ -200,9 +200,9 @@ mvn spring-boot:run
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/backend-doc.png?raw=true)
 
-**✅ Step 2f. Test Backend API** :using the OpenAPI generated documentation. You can open the `GET` bloc labeled `/api/v1/todos` and pick `Try It Out`. Then locate `Execute` to test the API  and get a few results.
+**✅ Step 2f. Test Backend API** :using the OpenAPI generated documentation. You can open the `GET` bloc labeled `/api/v1/todos/` and pick `Try It Out`. Then locate `Execute` to test the API  and get a few results.
 
-***Note**:For some resources `/api/v1/todos/{task-id}` you need to provide a valid UUID as a string *(not the smith default value proposed). You can get one by invoking the operation `GET /api/v1/todos/` first *
+**Note:** *For some resources `/api/v1/todos/{task-id}` you need to provide a valid UUID as a string. You can get the list of valid ones by invoking the operation `GET /api/v1/todos/` first. The default value `6f6c5b47-4e23-4437-ada8-d0a6f79330a2` should work. *
 
 
 **👁️ Expected output**
@@ -372,7 +372,7 @@ ConnectivityToAstraExplicitTest:  + [OK] - Connection Established to Astra with 
 
 **✅ Step 4d. Fix unit test `ConnectivityToAstraWithConfTest.java`**
 
-Providing the parameter in static way is useful for tests but we can do better but externalizing to a configuration file here `application_test.conf`. Open the file and edit with your Astra informations.
+Providing the parameter in static way is useful for tests but we can do better but externalizing to a configuration file in `src/test/resources`:  **`application_test.conf`**  Open the file and edit with your Astra informations.
 
 *Do not copy-paste*
 ```yaml
