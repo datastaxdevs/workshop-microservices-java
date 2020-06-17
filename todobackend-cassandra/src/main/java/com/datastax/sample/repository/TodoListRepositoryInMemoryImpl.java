@@ -61,9 +61,10 @@ public class TodoListRepositoryInMemoryImpl implements TodoListRepository {
     
     @PostConstruct
     public void populate() {
-        Task one   = new Task("one");
-        Task two   = new Task("two");
-        Task three = new Task("three");
+        Task one   = new Task("Local backend API task1");
+        one.setUuid(UUID.fromString("6f6c5b47-4e23-4437-ada8-d0a6f79330a2"));
+        Task two   = new Task("Local backend API task2");
+        Task three = new Task("Local backend API task3");
         mapOfTasks.put(one.getUuid(), one);
         mapOfTasks.put(two.getUuid(), two);
         mapOfTasks.put(three.getUuid(), three);

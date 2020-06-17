@@ -180,7 +180,8 @@ public class TodoListRestController {
     public ResponseEntity<TaskResource> read(HttpServletRequest request,
             @Parameter(name="taskId", 
                      description="Unique identifier for the task",
-                     example = "smith", required=true )
+                     example = "6f6c5b47-4e23-4437-ada8-d0a6f79330a2", 
+                     required=true )
             @PathVariable(value = "taskId") String taskId) {
         logger.info("Find a task with its id {}", rewriteUrl(request) + "?" + request.getQueryString());
         Assert.hasLength(taskId, "TaskId id is required and should not be null");

@@ -164,19 +164,12 @@ mvn spring-boot:run
 **👁️ Expected output**
 ```bash
 [...]
-INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for Spring microservices with Apache Cassandra 1.0-SNAPSHOT:
 [INFO] 
-[INFO] Spring microservices with Apache Cassandra ......... SUCCESS [  4.115 s]
-[INFO] + microservice-1-common ............................ SUCCESS [  8.893 s]
-[INFO] + microservice-2-spring-boot ....................... SUCCESS [  3.504 s]
-[INFO] + microservice-3-spring-data ....................... SUCCESS [  1.369 s]
-[INFO] + microservice-4-spring-webflux .................... SUCCESS [  0.311 s]
+[INFO] Spring microservices with Apache Cassandra ......... SUCCESS [  0.004 s]
+[INFO] + todobackend-cassandra ............................ SUCCESS [  0.122 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  18.701 s
-[INFO] Finished at: 2020-06-15T13:08:57Z
 [INFO] ------------------------------------------------------------------------
 ```
 
@@ -208,6 +201,9 @@ INFO] ------------------------------------------------------------------------
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/backend-doc.png?raw=true)
 
 **✅ Step 2f. Test Backend API** :using the OpenAPI generated documentation. You can open the `GET` bloc labeled `/api/v1/todos` and pick `Try It Out`. Then locate `Execute` to test the API  and get a few results.
+
+***Note**:For some resources `/api/v1/todos/{task-id}` you need to provide a valid UUID as a string *(not the smith default value proposed). You can get one by invoking the operation `GET /api/v1/todos/` first *
+
 
 **👁️ Expected output**
 
