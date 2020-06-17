@@ -25,7 +25,7 @@ public class ConnectivityToAstraExplicitTest {
     private static Logger LOGGER = LoggerFactory.getLogger(ConnectivityToAstraExplicitTest.class);
     
     /** Settings. */
-    public static String ASTRA_ZIP_FILE = "/Users/cedricklunven/Downloads/secure-connect-devworkshopdb.zip";
+    public static String ASTRA_ZIP_FILE = "/Users/cedricklunven/Downloads/secure-connect-dev-workshop-db.zip";
     public static String ASTRA_USERNAME = "todouser";
     public static String ASTRA_PASSWORD = "todopassword";
     public static String ASTRA_KEYSPACE = "todoapp";
