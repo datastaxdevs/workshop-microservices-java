@@ -108,6 +108,13 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<showWarnings>false</showWarnings>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>com.datastax.oss</groupId>
+							<artifactId>java-driver-mapper-processor</artifactId>
+							<version>${cassandra-java-driver.version}</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 			<plugin>

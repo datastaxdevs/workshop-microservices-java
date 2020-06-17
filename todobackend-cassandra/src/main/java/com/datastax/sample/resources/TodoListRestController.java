@@ -64,7 +64,7 @@ public class TodoListRestController {
     @Autowired
     @Qualifier("todobackend.repo.inmemory")
     // @Qualifier("todobackend.repo.cassandra-driver")
-    // @Qualifier("todobackend.repo.cassandra-object-mapper")
+    //@Qualifier("todobackend.repo.cassandra-object-mapper")
     // @Qualifier("todobackend.repo.spring-data-cassandra")
     private TodoListRepository todoRepository;
     

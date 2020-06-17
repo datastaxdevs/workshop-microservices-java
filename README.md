@@ -540,10 +540,15 @@ Now we now how we will switch from one implementation to another. Take a look at
 
 ## 6. CRUD Repository with Object Mapper
 
+**✅ Step 6a. Check that the `ObjectMapper` repository is working** : We test want to test class [`CrudWithObjectMapperTest`](./todobackend-cassandra/src/test/java/com/datastax/samples/astra/CrudWithObjectMapperTest.java).
 
-**✅ Step 6a. Change injection dependency in `TodoListRestController`**: We have create other implementations for you this time using Object Mapper.
+```bash
+mvn test -Dtest=com.datastax.samples.astra.CrudWithObjectMapperTest
+```
 
-- In controller [`TodoListRestController`](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java) nowChange `@Qualifier` to  to `todobackend.repo.cassandra-object-mapper` by commenting/uncommenting proper lines. 
+**✅ Step 6b. Change injection dependency in `TodoListRestController`**: We switch from one implementation to another. Take a look at class [`TodoListRepositoryObjectMapperImpl`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepositoryObjectMapperImpl.java) implementing the `TodoListRepository` to see how we proceed.
+
+- In controller [`TodoListRestController`](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java) change from `@Qualifier("todobackend.repo.cassandra-driver")` to `@Qualifier("todobackend.repo.cassandra-object-mapper")` by commenting/uncommenting proper lines. 
 
 **👁️ Expected code **
 
@@ -556,7 +561,7 @@ Now we now how we will switch from one implementation to another. Take a look at
 private TodoListRepository todoRepository;
 ```
 
-Now we now how we will switch from one implementation to another. Take a look at class [`TodoListRepositoryObjectMapperImpl`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepositoryObjectMapperImpl.java) implementing the `TodoListRepository` to see how we proceed.
+
 
 **✅ Step 6b. Restart the application**: Use the `CTRL+C` shortcut on the terminal window to stop running the application and restart.
 
