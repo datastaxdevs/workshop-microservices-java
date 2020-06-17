@@ -20,7 +20,7 @@ import com.datastax.sample.objectmapper.TaskEntity;
  * 
  * @author Cedrick LUNVEN (@clunven)
  */
-@Repository("todobackend.repo.cassandra-object-mapper")
+//@Repository("todobackend.repo.cassandra-object-mapper")
 public class TodoListRepositoryObjectMapperImpl implements TodoListRepository {
 
     /** CqlSession holding metadata to interact with Cassandra. */

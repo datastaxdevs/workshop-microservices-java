@@ -1,23 +1,11 @@
 package com.datastax.sample.springdata;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.cassandra.CqlSessionBuilderCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.config.AbstractSessionConfiguration;
-import org.springframework.data.cassandra.config.SchemaAction;
-import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecification;
-import org.springframework.data.cassandra.core.cql.keyspace.DataCenterReplication;
-import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
-import org.springframework.data.cassandra.core.cql.session.init.KeyspacePopulator;
-import org.springframework.data.cassandra.core.cql.session.init.ResourceKeyspacePopulator;
 
-import com.datastax.oss.driver.api.core.CqlSessionBuilder;
-import com.datastax.sample.SpringDataApplication;
+import com.datastax.oss.driver.api.core.CqlSession;
 
 /**
  * Configuration Cassandra Driver <-> Spring Data.
@@ -32,79 +20,25 @@ import com.datastax.sample.SpringDataApplication;
  *
  * @author Cedrick LUNVEN (@clunven)
  */
-@Configuration
-public class SpringDataCassandraJavaConfig 
-                extends AbstractCassandraConfiguration 
-                implements CqlSessionBuilderCustomizer {
+//@Configuration
+public class SpringDataCassandraJavaConfig extends AbstractCassandraConfiguration {
     
+    /** Create CqlSession. */
+    @Bean
+    public CqlSession cqlSession() {
+        return CqlSession.builder().build();
+    }
+    
+    /** {@inheritDoc} */
     @Override
     protected String getKeyspaceName() {
-        return keyspaceName;
-    }
-    
-    @Override
-    protected String getLocalDataCenter() {
-        return localDataCenter;
-    }
-    
-    @Override
-    protected String getContactPoints() {
-        return contactPoints;
-    }
-    /** {@inheritDoc} */
-    @Override
-    protected int getPort() {
-        return port;
-    }
-    /** {@inheritDoc} */
-    @Override
-    public void customize(CqlSessionBuilder cqlSessionBuilder) {
-        //cqlSessionBuilder.
-        // Here you define the SecureCloudConnectBundle for ASTRA
-    }
-    
-    @Value("${spring.data.cassandra.keyspace-name:springdemo}")
-    private String keyspaceName;
-    
-    @Value("${spring.data.cassandra.local-datacenter:dc1}")
-    private String localDataCenter;
-    
-    @Value("${spring.data.cassandra.contact-point:localhost}")
-    private String contactPoints;
-    
-    @Value("${spring.data.cassandra.port:9042}")
-    private int port;
-    
-    /** {@inheritDoc} */
-    @Override
-    protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
-        return Arrays.asList(CreateKeyspaceSpecification
-                .createKeyspace(getKeyspaceName())
-                .ifNotExists(true)
-                .withNetworkReplication(DataCenterReplication.of(getLocalDataCenter(), 3))
-                .with(KeyspaceOption.DURABLE_WRITES));
+        return cqlSession().getKeyspace().get().toString();
     }
     
     /** {@inheritDoc} */
     @Override
     public String[] getEntityBasePackages() {
-        return new String[]{ SpringDataApplication.class.getPackageName() + ".entity" };
-    }
-    
-    /** {@inheritDoc} */
-    @Override
-    public SchemaAction getSchemaAction() {
-        return SchemaAction.CREATE_IF_NOT_EXISTS;
-    }
-    
-    /** {@inheritDoc} */
-    @Override
-    protected KeyspacePopulator keyspacePopulator() {
-        ResourceKeyspacePopulator keyspacePopulate = new ResourceKeyspacePopulator();
-        keyspacePopulate.setSeparator(";");
-        keyspacePopulate.setScripts(new ClassPathResource("sample-data.cql"));
-        return keyspacePopulate;
-    }
-    
+        return new String[]{ "com.datastax.sample.springdata" };
+    }    
 
 }

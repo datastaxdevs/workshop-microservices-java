@@ -1,17 +1,15 @@
 package com.datastax.sample.repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.annotation.PostConstruct;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
 import com.datastax.sample.model.Task;
+import com.datastax.sample.springdata.TaskSpringData;
+import com.datastax.sample.springdata.TaskSpringDataRepository;
 
 /**
  * Default in-memory implementation of the repository.
@@ -20,53 +18,54 @@ import com.datastax.sample.model.Task;
  * 
  * @author Cedrick LUNVEN (@clunven)
  */
-@Repository("todobackend.repo.spring-data-cassandra")
+//@Repository("todobackend.repo.spring-data-cassandra")
 public class TodoListRepositorySpringDataImpl implements TodoListRepository {
-
-    /** This will be our storage in memory. */
-    private Map<UUID, Task> mapOfTasks = new ConcurrentHashMap<>();
+  
+    /** CqlSession holding metadata to interact with Cassandra. */
+    private TaskSpringDataRepository taskDao;
+    
+    /** External Initialization. */
+    public TodoListRepositorySpringDataImpl(TaskSpringDataRepository taskDao) {
+        this.taskDao = taskDao;
+    }
     
     /** {@inheritDoc} */
     @Override
     public List<Task> findAll() {
-        return new ArrayList<>(mapOfTasks.values());
+        return taskDao.findAll().stream()
+                .map(TaskSpringData::mapAsTask)
+                .collect(Collectors.toList());
     }
     
     /** {@inheritDoc} */
     @Override
     public void deleteAll() {
-        mapOfTasks.clear();
+        taskDao.deleteAll();
     }
     
     /** {@inheritDoc} */
     @Override
     public Optional<Task> findById(UUID uid) {
         if (null == uid) return Optional.empty();
-        return Optional.ofNullable(mapOfTasks.get(uid));
+        Optional<TaskSpringData> entity = taskDao.findById(uid);
+        if (entity.isEmpty()) return Optional.empty();
+        return Optional.ofNullable(entity.get().mapAsTask());
     }
     
     /** {@inheritDoc} */
     @Override
     public void upsert(Task dto) {
         if (null != dto) {
-            mapOfTasks.put(dto.getUuid(), dto);
+            taskDao.save(new TaskSpringData(dto));
         }
     }
     
     /** {@inheritDoc} */
     @Override
     public void delete(UUID uid) {
-        mapOfTasks.remove(uid);
-    }
-    
-    @PostConstruct
-    public void populate() {
-        Task one   = new Task("one");
-        Task two   = new Task("two");
-        Task three = new Task("three");
-        mapOfTasks.put(one.getUuid(), one);
-        mapOfTasks.put(two.getUuid(), two);
-        mapOfTasks.put(three.getUuid(), three);
+        TaskSpringData tsd = new TaskSpringData();
+        tsd.setUuid(uid);
+        taskDao.delete(tsd);
     }
          
 }

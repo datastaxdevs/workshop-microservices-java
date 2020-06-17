@@ -560,8 +560,6 @@ mvn test -Dtest=com.datastax.samples.astra.CrudWithObjectMapperTest
 private TodoListRepository todoRepository;
 ```
 
-
-
 **✅ Step 6b. Restart the application**: Use the `CTRL+C` shortcut on the terminal window to stop running the application and restart.
 
 **✅ Step 6c. Test the application connected to ASTRA.** we wil now reuse the provided clientto work with our backend API now connected to ASTRA !.
@@ -576,15 +574,26 @@ private TodoListRepository todoRepository;
 
 ## 7. CRUD Repository with Spring Data
 
-**✅ 7.a Change cassandra configuration**:
+Now we now how we will switch from one implementation to another. Take a look at class [`TodoListRepositorySpringDataImpl`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepositorySpringDataImpl.java) implementing the `TodoListRepository` to see how we proceed.
+
+**✅ 7.a Change cassandra configuration**: We need to create a new class extending the Spring Data `AbstractCassandraConfiguration`. As such let's comment previous one.
 
 - Comment annotation `@Configuration` in `CassandraDriverConfig.java` class
 
-**✅ Step 7b. Change injection dependency in `TodoListRestController`**: We have create other implementations for you this time using Spring Data.
+- Uncomment annotation `@Configuration` in `SpringDataCassandraJavaConfig.java` class
+
+
+**✅ Step 7b. Check that unit with Spring Data is working** : We test want to test class [`CrudWithSpringDataTest`](./todobackend-cassandra/src/test/java/com/datastax/samples/astra/CrudWithSpringDataTest.java).
+
+```bash
+mvn test -Dtest=com.datastax.samples.astra.CrudWithSpringDataTest
+```
+
+**✅ Step 7c. Change injection dependency in `TodoListRestController`**: We have create other implementations for you this time using Spring Data.
 
 - In controller [`TodoListRestController`](./todobackend-cassandra/src/main/java/com/datastax/sample/resources/TodoListRestController.java) nowChange `@Qualifier` to `todobackend.repo.spring-data-cassandra` by commenting/uncommenting proper lines. 
 
-**👁️ Expected code **
+**👁️ Expected code**:
 
 ```java
 @Autowired
@@ -595,11 +604,9 @@ private TodoListRepository todoRepository;
 private TodoListRepository todoRepository;
 ```
 
-Now we now how we will switch from one implementation to another. Take a look at class [`TodoListRepositorySpringDataImpl`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepositorySpringDataImpl.java) implementing the `TodoListRepository` to see how we proceed.
+**✅ Step 7d. Restart the application**: Use the `CTRL+C` shortcut on the terminal window to stop running the application and restart.
 
-**✅ Step 7c. Restart the application**: Use the `CTRL+C` shortcut on the terminal window to stop running the application and restart.
-
-**✅ Step 7d. Test the application connected to ASTRA.** we wil now reuse the provided clientto work with our backend API now connected to ASTRA !.
+**✅ Step 7e. Test the application connected to ASTRA.** we wil now reuse the provided clientto work with our backend API now connected to ASTRA !.
 
 - 💻 If your work locally : [https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/](https://www.todobackend.com/client/index.html?http://localhost:8080/api/v1/todos/)
 
