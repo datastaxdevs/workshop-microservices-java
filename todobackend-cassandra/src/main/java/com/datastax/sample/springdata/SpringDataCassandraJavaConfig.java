@@ -2,8 +2,8 @@ package com.datastax.sample.springdata;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
-import org.springframework.data.cassandra.config.AbstractSessionConfiguration;
+//import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
+//import org.springframework.data.cassandra.config.AbstractSessionConfiguration;
 
 import com.datastax.oss.driver.api.core.CqlSession;
 
@@ -21,22 +21,22 @@ import com.datastax.oss.driver.api.core.CqlSession;
  * @author Cedrick LUNVEN (@clunven)
  */
 //@Configuration
-public class SpringDataCassandraJavaConfig extends AbstractCassandraConfiguration {
+public class SpringDataCassandraJavaConfig /*extends AbstractCassandraConfiguration*/ {
     
     /** Create CqlSession. */
-    @Bean
+    //@Bean
     public CqlSession cqlSession() {
         return CqlSession.builder().build();
     }
     
     /** {@inheritDoc} */
-    @Override
+    //@Override
     protected String getKeyspaceName() {
         return cqlSession().getKeyspace().get().toString();
     }
     
     /** {@inheritDoc} */
-    @Override
+    //@Override
     public String[] getEntityBasePackages() {
         return new String[]{ "com.datastax.sample.springdata" };
     }    

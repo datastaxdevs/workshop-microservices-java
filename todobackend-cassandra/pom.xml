@@ -47,12 +47,13 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		
-		<!-- Spring Data -->
+		<!-- Spring Data
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-cassandra</artifactId>
 		</dependency>
-		
+		 -->
+		 
 		<!-- Doc -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

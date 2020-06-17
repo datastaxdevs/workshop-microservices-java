@@ -18,18 +18,18 @@ import com.datastax.sample.springdata.TaskSpringDataRepository;
  * 
  * @author Cedrick LUNVEN (@clunven)
  */
-//@Repository("todobackend.repo.spring-data-cassandra")
-public class TodoListRepositorySpringDataImpl implements TodoListRepository {
+@Repository("todobackend.repo.spring-data-cassandra")
+public class TodoListRepositorySpringDataImpl /*implements TodoListRepository*/ {
   
-    /** CqlSession holding metadata to interact with Cassandra. */
+    /** CqlSession holding metadata to interact with Cassandra. *
     private TaskSpringDataRepository taskDao;
     
-    /** External Initialization. */
+    /** External Initialization. *
     public TodoListRepositorySpringDataImpl(TaskSpringDataRepository taskDao) {
         this.taskDao = taskDao;
     }
     
-    /** {@inheritDoc} */
+    /** {@inheritDoc} *
     @Override
     public List<Task> findAll() {
         return taskDao.findAll().stream()
@@ -37,13 +37,13 @@ public class TodoListRepositorySpringDataImpl implements TodoListRepository {
                 .collect(Collectors.toList());
     }
     
-    /** {@inheritDoc} */
+    /** {@inheritDoc} *
     @Override
     public void deleteAll() {
         taskDao.deleteAll();
     }
     
-    /** {@inheritDoc} */
+    /** {@inheritDoc} *
     @Override
     public Optional<Task> findById(UUID uid) {
         if (null == uid) return Optional.empty();
@@ -52,7 +52,7 @@ public class TodoListRepositorySpringDataImpl implements TodoListRepository {
         return Optional.ofNullable(entity.get().mapAsTask());
     }
     
-    /** {@inheritDoc} */
+    /** {@inheritDoc} *
     @Override
     public void upsert(Task dto) {
         if (null != dto) {
@@ -60,12 +60,12 @@ public class TodoListRepositorySpringDataImpl implements TodoListRepository {
         }
     }
     
-    /** {@inheritDoc} */
+    /** {@inheritDoc} *
     @Override
     public void delete(UUID uid) {
         TaskSpringData tsd = new TaskSpringData();
         tsd.setUuid(uid);
         taskDao.delete(tsd);
     }
-         
+     */    
 }
