@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
 public class OpenApiDocumentationConfig {
@@ -15,7 +16,7 @@ public class OpenApiDocumentationConfig {
     @Bean
     public OpenAPI openApiSpec(@Value("${springdoc.version}") String appVersion) {
         String des = "Implementation of TodoBackend application with Spring WebMVC and storage in Apache Cassandra";
-        return new OpenAPI().info(new Info()
+        return new OpenAPI().addServersItem(new Server().url("/")).info(new Info()
                                 .title("DevWorkshop :: TodoBackend Rest API")
                                 .version(appVersion).description(des)
                                 .termsOfService("http://swagger.io/terms/")
