@@ -587,19 +587,117 @@ private TodoListRepository todoRepository;
 
 ## 7. CRUD Repository with Spring Data
 
+Spring-Data is like `ObjectMapper` and help reducing boilerplate code. You define entities and interfaces, the code under the hood is generated for you.
+
+**✅ 7.a Add Spring Data Dependency**: In the `pom.xml` file of project `todobackend-cassandra` uncomment Spring Data dependency.
+
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-cassandra</artifactId>
+</dependency>
+```
+
+**Note** *As soon as the library is imported it will look for a bean `CqlSession` and if nothing existing it will try to connect to localhost. As the workshop started with the store InMemory we decided to comment this at beginning at the workshop.*
+
 Now we now how we will switch from one implementation to another. Take a look at class [`TodoListRepositorySpringDataImpl`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepositorySpringDataImpl.java) implementing the `TodoListRepository` to see how we proceed.
 
-**✅ 7.a Change cassandra configuration**: We need to create a new class extending the Spring Data `AbstractCassandraConfiguration`. As such let's comment previous one.
+**✅ 7.b Uncomment all the source code we will need**: With the new dependency we can now uncomment part of the code working with Spring-Data.
 
-- Comment annotation `@Configuration` in `CassandraDriverConfig.java` class
+- Uncomment code in class [`TaskSpringData`](./todobackend-cassandra/src/main/java/com/datastax/sample/springdata/TaskSpringData.java)
 
-- Uncomment annotation `@Configuration` in `SpringDataCassandraJavaConfig.java` class
+```java
+// Uncomment Imports
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.CassandraType;
+import org.springframework.data.cassandra.core.mapping.CassandraType.Name;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
+import org.springframework.data.cassandra.core.mapping.Table;
 
+[...]
 
-**✅ Step 7b. Check that unit with Spring Data is working** : We test want to test class [`CrudWithSpringDataTest`](./todobackend-cassandra/src/test/java/com/datastax/samples/astra/CrudWithSpringDataTest.java).
+// Uncomment annotations
+@Table(value = TodoAppSchema.TABLE_TODO_TASKS)
 
-```bash
-mvn test -Dtest=com.datastax.samples.astra.CrudWithSpringDataTest
+[...]
+@PrimaryKeyColumn(
+        name = TodoAppSchema.TASK_COL_UID, ordinal = 0, 
+        type = PrimaryKeyType.PARTITIONED)
+@CassandraType(type = Name.UUID)
+private UUID uuid;
+
+[...]
+```
+- Uncomment code in class [`TaskSpringDataRepository`](./todobackend-cassandra/src/main/java/com/datastax/sample/springdata/TaskSpringDataRepository.java)
+
+```java
+// Uncomment Imports
+import org.springframework.data.cassandra.repository.CassandraRepository;
+import org.springframework.data.cassandra.repository.Query;
+
+[...]
+
+// Uncomment bloc
+@Repository("todobackend.repo.spring")
+public interface TaskSpringDataRepository extends TodoAppSchema, CassandraRepository<TaskSpringData, UUID> {
+    
+    @Query("SELECT * FROM " + TodoAppSchema.TABLE_TODO_TASKS + 
+          " WHERE " + TodoAppSchema.TASK_COL_UID + " = ?0")
+    Optional<TaskSpringData> findByTaskByIdO(UUID taskid);
+}
+
+```
+
+- Uncomment code in class [`TodoListRepositorySpringDataImpl`](./todobackend-cassandra/src/main/java/com/datastax/sample/repository/TodoListRepositorySpringDataImpl.java)
+
+```java
+import com.datastax.sample.springdata.TaskSpringDataRepository;
+
+// Uncomment bloc
+@Repository("todobackend.repo.spring-data-cassandra")
+public class TodoListRepositorySpringDataImpl implements TodoListRepository {
+  
+    private TaskSpringDataRepository taskDao;
+    
+    public TodoListRepositorySpringDataImpl(TaskSpringDataRepository taskDao) {
+        this.taskDao = taskDao;
+    }
+    
+    @Override
+    public List<Task> findAll() {
+        return taskDao.findAll().stream()
+                .map(TaskSpringData::mapAsTask)
+                .collect(Collectors.toList());
+    }
+ 
+    @Override
+    public void deleteAll() {
+        taskDao.deleteAll();
+    }
+ 
+    @Override
+    public Optional<Task> findById(UUID uid) {
+        if (null == uid) return Optional.empty();
+        Optional<TaskSpringData> entity = taskDao.findById(uid);
+        if (entity.isEmpty()) return Optional.empty();
+        return Optional.ofNullable(entity.get().mapAsTask());
+    }
+ 
+    @Override
+    public void upsert(Task dto) {
+        if (null != dto) {
+            taskDao.save(new TaskSpringData(dto));
+        }
+    }
+ 
+    @Override
+    public void delete(UUID uid) {
+        TaskSpringData tsd = new TaskSpringData();
+        tsd.setUuid(uid);
+        taskDao.delete(tsd);
+    }    
+}
 ```
 
 **✅ Step 7c. Change injection dependency in `TodoListRestController`**: We have create other implementations for you this time using Spring Data.

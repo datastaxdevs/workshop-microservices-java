@@ -19,7 +19,10 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.config.DriverConfigLoader;
 import com.datastax.oss.driver.api.core.cql.SimpleStatement;
+import com.datastax.oss.driver.api.core.cql.SimpleStatementBuilder;
+import com.datastax.oss.driver.api.querybuilder.QueryBuilder;
 import com.datastax.sample.model.Task;
+import com.datastax.sample.model.TodoAppSchema;
 import com.datastax.sample.repository.TodoListRepository;
 import com.datastax.sample.repository.TodoListRepositoryCassandraDriverImpl;
 
@@ -29,7 +32,7 @@ import com.datastax.sample.repository.TodoListRepositoryCassandraDriverImpl;
  */
 @RunWith(JUnitPlatform.class)
 @SpringJUnitConfig
-public class CrudWithCassandraDriverIntegrationTest {
+public class CrudWithCassandraDriverIntegrationTest implements TodoAppSchema {
 
     /** Logger for the class. */
     private static Logger LOGGER = 
@@ -85,11 +88,22 @@ public class CrudWithCassandraDriverIntegrationTest {
         
         // Using CqlSession and SimpleStatement insert this is table todo_tasks
         UUID    sampleUID = UUID.randomUUID();
+        System.out.println(sampleUID);
         String  sampleTitle = "A TASK";
         int     sampleOrder = 1;
         boolean sampleComplete = true;
         
-        // Create here your statement and execute it 
+        // Create here your statement and execute it
+        //QueryBuilder.insertInto("todo_tasks").value(COL, value)
+        SimpleStatement stmt = SimpleStatement.builder(""
+                + "INSERT INTO todo_tasks (uid, title, offset, completed) "
+                + "VALUES (?,?,?,?)")
+                .addPositionalValue(sampleUID)
+                .addPositionalValue(sampleTitle)
+                .addPositionalValue(sampleOrder)
+                .addPositionalValue(sampleComplete).
+                build();
+        cqlSession.execute(stmt);
         
         //SimpleStatement stmtInsertTask = SimpleStatement.builder(.sampleTitle...
         Assertions.assertFalse(todoRepo.findById(sampleUID).isEmpty());

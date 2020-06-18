@@ -52,8 +52,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-cassandra</artifactId>
 		</dependency>
-		 -->
-		 
+		-->
+		
 		<!-- Doc -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

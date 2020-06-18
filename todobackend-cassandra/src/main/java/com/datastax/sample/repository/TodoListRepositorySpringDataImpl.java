@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.datastax.sample.model.Task;
 import com.datastax.sample.springdata.TaskSpringData;
-import com.datastax.sample.springdata.TaskSpringDataRepository;
+//import com.datastax.sample.springdata.TaskSpringDataRepository;
 
 /**
  * Default in-memory implementation of the repository.
@@ -18,18 +18,16 @@ import com.datastax.sample.springdata.TaskSpringDataRepository;
  * 
  * @author Cedrick LUNVEN (@clunven)
  */
+/*
 @Repository("todobackend.repo.spring-data-cassandra")
-public class TodoListRepositorySpringDataImpl /*implements TodoListRepository*/ {
+public class TodoListRepositorySpringDataImpl implements TodoListRepository {
   
-    /** CqlSession holding metadata to interact with Cassandra. *
     private TaskSpringDataRepository taskDao;
     
-    /** External Initialization. *
     public TodoListRepositorySpringDataImpl(TaskSpringDataRepository taskDao) {
         this.taskDao = taskDao;
     }
     
-    /** {@inheritDoc} *
     @Override
     public List<Task> findAll() {
         return taskDao.findAll().stream()
@@ -37,13 +35,11 @@ public class TodoListRepositorySpringDataImpl /*implements TodoListRepository*/ 
                 .collect(Collectors.toList());
     }
     
-    /** {@inheritDoc} *
     @Override
     public void deleteAll() {
         taskDao.deleteAll();
     }
     
-    /** {@inheritDoc} *
     @Override
     public Optional<Task> findById(UUID uid) {
         if (null == uid) return Optional.empty();
@@ -52,7 +48,6 @@ public class TodoListRepositorySpringDataImpl /*implements TodoListRepository*/ 
         return Optional.ofNullable(entity.get().mapAsTask());
     }
     
-    /** {@inheritDoc} *
     @Override
     public void upsert(Task dto) {
         if (null != dto) {
@@ -60,12 +55,10 @@ public class TodoListRepositorySpringDataImpl /*implements TodoListRepository*/ 
         }
     }
     
-    /** {@inheritDoc} *
     @Override
     public void delete(UUID uid) {
         TaskSpringData tsd = new TaskSpringData();
         tsd.setUuid(uid);
         taskDao.delete(tsd);
-    }
-     */    
-}
+    }    
+}*/

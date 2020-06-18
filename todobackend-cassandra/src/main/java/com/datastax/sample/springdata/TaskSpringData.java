@@ -21,38 +21,28 @@ import com.datastax.sample.model.TodoAppSchema;
 //@Table(value = TodoAppSchema.TABLE_TODO_TASKS)
 public class TaskSpringData implements Serializable, Comparable<Task>, TodoAppSchema {
 
-    /** Serial for the class. */
     private static final long serialVersionUID = -5844442448334944278L;
     
-//    @PrimaryKeyColumn(
-//            name = TodoAppSchema.TASK_COL_UID, ordinal = 0, 
-//            type = PrimaryKeyType.PARTITIONED)
-//    @CassandraType(type = Name.UUID)
+    //@PrimaryKeyColumn(
+    //        name = TodoAppSchema.TASK_COL_UID, ordinal = 0, 
+    //        type = PrimaryKeyType.PARTITIONED)
+    //@CassandraType(type = Name.UUID)
     private UUID uuid;
     
-    /** Title. */
-//    @Column(TASK_COL_TITLE)
-//    @CassandraType(type = Name.TEXT)
+    //@Column(TASK_COL_TITLE)
+    //@CassandraType(type = Name.TEXT)
     private String title;
 
-    /** Status. */
-//    @Column(TASK_COL_COMPLETED)
-//    @CassandraType(type = Name.BOOLEAN)
+    //@Column(TASK_COL_COMPLETED)
+    //@CassandraType(type = Name.BOOLEAN)
     private boolean completed = false;
 
-    /** order field. */
-//    @Column(TASK_COL_OFFSET)
-//    @CassandraType(type = Name.INT)
+    //@Column(TASK_COL_OFFSET)
+    //@CassandraType(type = Name.INT)
     private int order = 0;
     
-    /**
-     * Constructors.
-     */
     public TaskSpringData() {}
-    
-    /**
-     * Back to common bean
-     */
+  
     public Task mapAsTask() {
         Task t = new Task();
         t.setUuid(this.uuid);
@@ -61,10 +51,7 @@ public class TaskSpringData implements Serializable, Comparable<Task>, TodoAppSc
         t.setTitle(this.title);
         return t;
     }
-    
-    /**
-     * Created from the common bean
-     */
+   
     public TaskSpringData(Task t) {
         this.uuid       = t.getUuid();
         this.title      = t.getTitle();

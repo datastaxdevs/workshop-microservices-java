@@ -16,12 +16,12 @@ public class OpenApiDocumentationConfig {
     @Bean
     public OpenAPI openApiSpec(@Value("${springdoc.version}") String appVersion) {
         String des = "Implementation of TodoBackend application with Spring WebMVC and storage in Apache Cassandra";
-        return new OpenAPI().addServersItem(new Server().url("/")).info(new Info()
-                                .title("DevWorkshop :: TodoBackend Rest API")
-                                .version(appVersion).description(des)
-                                .termsOfService("http://swagger.io/terms/")
-                                .license(new License().name("Apache 2.0")
-                                .url("http://springdoc.org")));
+        Info info  = new Info().title("DevWorkshop :: TodoBackend Rest API")
+                .version(appVersion).description(des)
+                .termsOfService("http://swagger.io/terms/")
+                .license(new License().name("Apache 2.0")
+                .url("http://springdoc.org"));
+        return new OpenAPI().addServersItem(new Server().url("/")).info(info);
     }
     
     @Bean
