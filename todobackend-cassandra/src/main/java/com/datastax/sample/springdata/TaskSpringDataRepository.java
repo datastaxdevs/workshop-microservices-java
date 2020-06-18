@@ -5,10 +5,6 @@ import java.util.UUID;
 
 //import org.springframework.data.cassandra.repository.CassandraRepository;
 //import org.springframework.data.cassandra.repository.Query;
-import org.springframework.stereotype.Repository;
-
-//import org.springframework.data.cassandra.repository.CassandraRepository;
-//import org.springframework.data.cassandra.repository.Query;
 //import org.springframework.stereotype.Repository;
 
 import com.datastax.sample.model.TodoAppSchema;
