@@ -301,6 +301,12 @@ With the 3 fields below you can pick any name, simply REMIND them, they will be 
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/astra-create-6.png?raw=true)
 
+> **⚠️ Important**
+> ```
+> The instructor will show you on screen how to create a token 
+> but will have to destroy to token immediately for security reasons.
+> ```
+
 **✅ Step 3e. Import a notebook** : DataStax studio should now be opened.
 
 ![TodoBackendClient](https://github.com/DataStax-Academy/microservices-java-workshop-online/blob/master/z-materials/images/launch-studio-home.png?raw=true)
